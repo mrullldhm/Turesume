@@ -16,4 +16,27 @@ datasource db {
 }
 
 // define database table
-model Resume
+model Resume {
+  id String @id @default (cuid())
+  userId String
+
+  tittle String?
+  description String?
+  
+  photoUrl String?
+  colorHex String @default("#000000")
+  borderStyle String @default("squircle")
+  summary String?
+  firstName String?
+  lastName String?
+  jobTittle String?
+  city String?
+  country String?
+  phone String?
+  email String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("resume")
+}
