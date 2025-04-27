@@ -15,3 +15,5 @@ datasource db {
   url  	    = env("DATABASE_URL")
 }
 
+// define database table
+model Resume
