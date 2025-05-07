@@ -1,0 +1,52 @@
+// This is a client component
+// It will be rendered on the client side
+"use client";
+
+import Image from "next/image";
+import Link from "next/link";
+import logo from "@/assets/logo.png";
+import { UserButton } from "@clerk/nextjs";
+import { CreditCard } from "lucide-react";
+
+export default function Navbar() {
+  return (
+    <header className="shadow-sm">
+      <div className="max-w-7xl mx-auto p-3 flex items-center justify-between gap-3">
+        {/* LINK TO HOME PAGE */}
+        <Link href="/resumes" className="flex items-center gap-2">
+          <Image
+            src={logo}
+            alt="logo"
+            width={35}
+            height={35}
+            className="rounded-full"
+          />
+          <span className="text-xl font-bold tracking-tight">
+            AI Resume Builder
+          </span>
+        </Link>
+
+        {/* USER BUTTON FROM CLERK */}
+        <UserButton
+          appearance={{
+            elements: {
+              avatarBox: {
+                width: "2.5rem",
+                height: "2.5rem",
+              },
+            },
+          }}
+        >
+          {/* ADD A MENU ITEM FOR BILLING IN THE USER BUTTON */}
+          <UserButton.MenuItems>
+            <UserButton.Link
+              label="Billing"
+              labelIcon={<CreditCard className="size-4" />}
+              href="/billing"
+            />
+          </UserButton.MenuItems>
+        </UserButton>
+      </div>
+    </header>
+  );
+}
