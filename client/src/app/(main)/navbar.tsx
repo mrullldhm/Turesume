@@ -8,11 +8,11 @@ import logo from "@/assets/logo.png";
 import { UserButton } from "@clerk/nextjs";
 import { CreditCard } from "lucide-react";
 import ThemeToggle from "../../components/ThemeToggle";
-import {dark} from "@clerk/themes"
+import { dark } from "@clerk/themes"
 import { useTheme } from "next-themes";
 
 export default function Navbar() {
-  const {theme} = useTheme();
+  const {resolvedTheme} = useTheme();
 
   return (
     <header className="shadow-sm">
@@ -37,7 +37,7 @@ export default function Navbar() {
           {/* USER BUTTON COMPONENT FROM CLERK */}
           <UserButton
             appearance={{
-              baseTheme: theme === "dark" ? dark : undefined,
+              baseTheme: resolvedTheme === "dark" ? dark : undefined,
               elements: {
                 avatarBox: {
                   width: "2.5rem",
