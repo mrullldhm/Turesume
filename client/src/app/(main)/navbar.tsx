@@ -8,8 +8,12 @@ import logo from "@/assets/logo.png";
 import { UserButton } from "@clerk/nextjs";
 import { CreditCard } from "lucide-react";
 import ThemeToggle from "../../components/ThemeToggle";
+import {dark} from "@clerk/themes"
+import { useTheme } from "next-themes";
 
 export default function Navbar() {
+  const {theme} = useTheme();
+
   return (
     <header className="shadow-sm">
       <div className="max-w-7xl mx-auto p-3 flex items-center justify-between gap-3">
@@ -30,9 +34,10 @@ export default function Navbar() {
         <div className="flex items-center gap-3">
           {/* THEME TOGGLE MODE (NIGHT, LIGHT, SYSTEM) */}
           <ThemeToggle />
-          {/* USER BUTTON FROM CLERK */}
+          {/* USER BUTTON COMPONENT FROM CLERK */}
           <UserButton
             appearance={{
+              baseTheme: theme === "dark" ? dark : undefined,
               elements: {
                 avatarBox: {
                   width: "2.5rem",
