@@ -7,6 +7,7 @@ import Link from "next/link";
 import logo from "@/assets/logo.png";
 import { UserButton } from "@clerk/nextjs";
 import { CreditCard } from "lucide-react";
+import ThemeToggle from "../../components/ThemeToggle";
 
 export default function Navbar() {
   return (
@@ -26,26 +27,30 @@ export default function Navbar() {
           </span>
         </Link>
 
-        {/* USER BUTTON FROM CLERK */}
-        <UserButton
-          appearance={{
-            elements: {
-              avatarBox: {
-                width: "2.5rem",
-                height: "2.5rem",
+        <div className="flex items-center gap-3">
+          {/* THEME TOGGLE MODE (NIGHT, LIGHT, SYSTEM) */}
+          <ThemeToggle />
+          {/* USER BUTTON FROM CLERK */}
+          <UserButton
+            appearance={{
+              elements: {
+                avatarBox: {
+                  width: "2.5rem",
+                  height: "2.5rem",
+                },
               },
-            },
-          }}
-        >
-          {/* ADD A MENU ITEM FOR BILLING IN THE USER BUTTON */}
-          <UserButton.MenuItems>
-            <UserButton.Link
-              label="Billing"
-              labelIcon={<CreditCard className="size-4" />}
-              href="/billing"
-            />
-          </UserButton.MenuItems>
-        </UserButton>
+            }}
+          >
+            {/* ADD A MENU ITEM FOR BILLING IN THE USER BUTTON */}
+            <UserButton.MenuItems>
+              <UserButton.Link
+                label="Billing"
+                labelIcon={<CreditCard className="size-4" />}
+                href="/billing"
+              />
+            </UserButton.MenuItems>
+          </UserButton>
+        </div>
       </div>
     </header>
   );
