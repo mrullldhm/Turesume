@@ -8,8 +8,8 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: {
-    template: "%s - Turesume",
-    absolute: "Turesume"
+    template: "Turesume - %s",
+    default: "Turesume"
   },
   description: "Turesume – AI Resume Builder. Create a professional, ATS-friendly resume in minutes with our free AI-powered tool. Get personalized suggestions, beat applicant tracking systems, and land more interviews with a resume tailored to your dream job.",
 };
