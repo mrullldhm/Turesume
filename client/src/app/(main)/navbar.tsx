@@ -18,16 +18,16 @@ export default function Navbar() {
     <header className="shadow-sm">
       <div className="max-w-7xl mx-auto p-3 flex items-center justify-between gap-3">
         {/* LINK TO HOME PAGE */}
-        <Link href="/resumes" className="flex items-center gap-2">
+        <Link href="/resumes" className="flex items-center">
           <Image
             src={logo}
             alt="logo"
-            width={35}
-            height={35}
+            width={55}
+            // height={35}
             className="rounded-full"
           />
           <span className="text-xl font-bold tracking-tight">
-            AI Resume Builder
+            TURESUME
           </span>
         </Link>
 
