@@ -8,10 +8,10 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: {
-    template: "%s - AI Resume Builder",
-    absolute: "AI Resume Builder"
+    template: "%s - Turesume",
+    absolute: "Turesume"
   },
-  description: "AI Resume Builder is the easiest way to create a professional resume that will help you land your dream job",
+  description: "Turesume – AI Resume Builder. Create a professional, ATS-friendly resume in minutes with our free AI-powered tool. Get personalized suggestions, beat applicant tracking systems, and land more interviews with a resume tailored to your dream job.",
 };
 
 export default function RootLayout({
