@@ -16,7 +16,7 @@ export default function Navbar() {
 
   return (
     <header className="shadow-sm">
-      <div className="max-w-7xl mx-auto p-3 flex items-center justify-between gap-3">
+      <div className="max-w-7xl mx-auto p-2 flex items-center justify-between gap-3">
         {/* LINK TO HOME PAGE */}
         <Link href="/resumes" className="flex items-center">
           <Image
