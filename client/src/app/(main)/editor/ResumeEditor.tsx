@@ -2,6 +2,7 @@
 
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import GeneralInfoForm from "./forms/GeneralInfoForm";
 
 export default function ResumeEditor() {
   return (
@@ -19,7 +20,9 @@ export default function ResumeEditor() {
         {/* Full-height container */}
         <div className="absolute bottom-0 top-0 flex w-full">
           {/* Left Panel - Editing Interface (Full width on mobile, half on desktop) */}
-          <div className="w-full md:w-1/2">Left</div>
+          <div className="w-full md:w-1/2">
+            <GeneralInfoForm />
+          </div>
           
           {/* Vertical Divider (Visible only on desktop) */}
           <div className="grow md:border-r"></div>
