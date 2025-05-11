@@ -1,4 +1,5 @@
 import { Metadata } from "next"
+import ResumeEditor from "./ResumeEditor"
 
 export const metadata : Metadata = {
     title: "Editor",
@@ -6,4 +7,5 @@ export const metadata : Metadata = {
 }
 
 export default function Page() {
+    return <ResumeEditor />
 }
