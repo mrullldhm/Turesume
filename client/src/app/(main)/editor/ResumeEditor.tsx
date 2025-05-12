@@ -20,13 +20,13 @@ export default function ResumeEditor() {
         {/* Full-height container */}
         <div className="absolute bottom-0 top-0 flex w-full">
           {/* Left Panel - Editing Interface (Full width on mobile, half on desktop) */}
-          <div className="w-full md:w-1/2">
+          <div className="w-full md:w-1/2 p-3">
             <GeneralInfoForm />
           </div>
-          
+
           {/* Vertical Divider (Visible only on desktop) */}
           <div className="grow md:border-r"></div>
-          
+
           {/* Right Panel - Preview (Hidden on mobile, half width on desktop) */}
           <div className="hidden md:flex w-1/2">Right</div>
         </div>
@@ -40,13 +40,12 @@ export default function ResumeEditor() {
             <Button variant="secondary">Previous step</Button>
             <Button>Next step</Button>
           </div>
-          
+
           {/* Close Button Section */}
           <div className="flex items-center gap-3">
             <Button variant="secondary" asChild>
               <Link href="/resumes">Close</Link>
             </Button>
-
             {/* Saving Indicator (Hidden by default) */}
             <p className="text-muted-foreground opacity-0">Saving...</p>
           </div>
