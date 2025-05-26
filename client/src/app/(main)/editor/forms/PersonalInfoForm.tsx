@@ -111,7 +111,7 @@ export default function PersonalInfoForm() {
               <FormItem>
                 <FormLabel>Job Title</FormLabel>
                 <FormControl>
-                  <Input {...field} placeholder="e.g., Software Engineer" />
+                  <Input {...field} placeholder="e.g., Web Developer" />
                 </FormControl>
                 <FormMessage />
               </FormItem>
