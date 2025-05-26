@@ -2,11 +2,8 @@
 
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import PersonalInfoForm from "./forms/PersonalInfoForm";
-import GeneralInfoForm from "./forms/GeneralInfoForm";
 import { useSearchParams } from "next/navigation";
 import { steps } from "./step";
-import { Breadcrumb } from "@/components/ui/breadcrumb";
 import Breadcrumbs from "./Breadcrumbs";
 
 export default function ResumeEditor() {
