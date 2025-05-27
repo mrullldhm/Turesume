@@ -1,14 +1,14 @@
 "use client"; // Marks this as a Client Component in Next.js
 
-import { Button } from "@/components/ui/button";
-import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { steps } from "./step";
 import Breadcrumbs from "./Breadcrumbs";
+import Footer from "./Footer";
+// import Footer from "./Footer";
 
 export default function ResumeEditor() {
   const searchParams = useSearchParams();
-  const CurrentStep = searchParams.get("step") || steps[0].key;
+  const currentStep = searchParams.get("step") || steps[0].key;
 
   function setStep(key: string) {
     const newSearchParams = new URLSearchParams(searchParams);
@@ -17,7 +17,7 @@ export default function ResumeEditor() {
   }
 
   const FormComponent = steps.find(
-    step => step.key === CurrentStep
+    step => step.key === currentStep
   )?.component;
 
 return (
@@ -38,7 +38,7 @@ return (
           <div className="w-full md:w-1/2 p-3 overflow-y-auto space-y-6">
             {/* <GeneralInfoForm />
             <PersonalInfoForm /> */}
-            <Breadcrumbs currentStep={CurrentStep} setCurrentStep={setStep} />
+            <Breadcrumbs currentStep={currentStep} setCurrentStep={setStep} />
             {FormComponent && <FormComponent />}
           </div>
 
@@ -46,29 +46,10 @@ return (
           <div className="grow md:border-r"></div>
 
           {/* Right Panel - Preview (Hidden on mobile, half width on desktop) */}
-          <div className="hidden md:flex w-1/2">Right</div>
+          <div className="hidden md:flex w-1/2">Right Side</div>
         </div>
       </main>
-
-      {/* Footer with Navigation */}
-      <footer className="w-full border-t px-3 py-5">
-        <div className="max-w-7xl mx-auto flex flex-wrap justify-between gap-3">
-          {/* Step Navigation Buttons */}
-          <div className="flex items-center gap-3">
-            <Button variant="secondary">Previous step</Button>
-            <Button>Next step</Button>
-          </div>
-
-          {/* Close Button Section */}
-          <div className="flex items-center gap-3">
-            <Button variant="secondary" asChild>
-              <Link href="/resumes">Close</Link>
-            </Button>
-            {/* Saving Indicator (Hidden by default) */}
-            <p className="text-muted-foreground opacity-0">Saving...</p>
-          </div>
-        </div>
-      </footer>
+      <Footer currentStep={currentStep} setCurrentStep={setStep} />
     </div>
   );
 }

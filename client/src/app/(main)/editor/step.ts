@@ -7,7 +7,7 @@ export const steps: {
     key: string;
 }[] = [
     {
-        title: "General Information",
+        title: "General nformation",
         component: GeneralInfoForm,
         key: "general-info",
     },
