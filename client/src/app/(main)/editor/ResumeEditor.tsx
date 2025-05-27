@@ -4,10 +4,12 @@ import { useSearchParams } from "next/navigation";
 import { steps } from "./step";
 import Breadcrumbs from "./Breadcrumbs";
 import Footer from "./Footer";
-// import Footer from "./Footer";
 
 export default function ResumeEditor() {
-  const searchParams = useSearchParams();
+  const searchParams = useSearchParams(); // Get current search parameters from the URL
+  
+  
+  
   const currentStep = searchParams.get("step") || steps[0].key;
 
   function setStep(key: string) {
@@ -17,10 +19,10 @@ export default function ResumeEditor() {
   }
 
   const FormComponent = steps.find(
-    step => step.key === currentStep
+    (step) => step.key === currentStep,
   )?.component;
 
-return (
+  return (
     <div className="flex grow flex-col">
       {/* Header Section */}
       <header className="space-y-1.5 border-b px-3 py-5 text-center">
