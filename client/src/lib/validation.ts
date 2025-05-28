@@ -69,11 +69,19 @@ export const educationSchema = z.object({
 // TypeScript type automatically generated from the schema
 export type EducationValues = z.infer<typeof educationSchema>;
 
+// Skills Schema
+export const skillsSchema = z.object({
+  skills: z.array(z.string().trim()).optional(),
+});
+// TypeScript type automatically generated from the schema
+export type SkillsValues = z.infer<typeof skillsSchema>;
+
 export const resumeSchema = z.object({
   ...generalInfoSchema.shape,
   ...personalInfoSchema.shape,
   ...workExperienceSchema.shape,
   ...educationSchema.shape,
+  ...skillsSchema.shape,
 });
 
 export type ResumeValues = Omit<z.infer<typeof resumeSchema>, "photo"> & {

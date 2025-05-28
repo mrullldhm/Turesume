@@ -1156,6 +1156,7 @@ export namespace Prisma {
     country: number
     phone: number
     email: number
+    skill: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -1218,6 +1219,7 @@ export namespace Prisma {
     country?: true
     phone?: true
     email?: true
+    skill?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -1311,6 +1313,7 @@ export namespace Prisma {
     country: string | null
     phone: string | null
     email: string | null
+    skill: string[]
     createdAt: Date
     updatedAt: Date
     _count: ResumeCountAggregateOutputType | null
@@ -1348,6 +1351,7 @@ export namespace Prisma {
     country?: boolean
     phone?: boolean
     email?: boolean
+    skill?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     workExperiences?: boolean | Resume$workExperiencesArgs<ExtArgs>
@@ -1371,6 +1375,7 @@ export namespace Prisma {
     country?: boolean
     phone?: boolean
     email?: boolean
+    skill?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }, ExtArgs["result"]["resume"]>
@@ -1391,6 +1396,7 @@ export namespace Prisma {
     country?: boolean
     phone?: boolean
     email?: boolean
+    skill?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }, ExtArgs["result"]["resume"]>
@@ -1411,11 +1417,12 @@ export namespace Prisma {
     country?: boolean
     phone?: boolean
     email?: boolean
+    skill?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type ResumeOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "title" | "description" | "photoUrl" | "colorHex" | "borderStyle" | "summary" | "firstName" | "lastName" | "jobTittle" | "city" | "country" | "phone" | "email" | "createdAt" | "updatedAt", ExtArgs["result"]["resume"]>
+  export type ResumeOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "title" | "description" | "photoUrl" | "colorHex" | "borderStyle" | "summary" | "firstName" | "lastName" | "jobTittle" | "city" | "country" | "phone" | "email" | "skill" | "createdAt" | "updatedAt", ExtArgs["result"]["resume"]>
   export type ResumeInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     workExperiences?: boolean | Resume$workExperiencesArgs<ExtArgs>
     educations?: boolean | Resume$educationsArgs<ExtArgs>
@@ -1446,6 +1453,7 @@ export namespace Prisma {
       country: string | null
       phone: string | null
       email: string | null
+      skill: string[]
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["resume"]>
@@ -1888,6 +1896,7 @@ export namespace Prisma {
     readonly country: FieldRef<"Resume", 'String'>
     readonly phone: FieldRef<"Resume", 'String'>
     readonly email: FieldRef<"Resume", 'String'>
+    readonly skill: FieldRef<"Resume", 'String[]'>
     readonly createdAt: FieldRef<"Resume", 'DateTime'>
     readonly updatedAt: FieldRef<"Resume", 'DateTime'>
   }
@@ -4594,6 +4603,7 @@ export namespace Prisma {
     country: 'country',
     phone: 'phone',
     email: 'email',
+    skill: 'skill',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
@@ -4724,6 +4734,7 @@ export namespace Prisma {
     country?: StringNullableFilter<"Resume"> | string | null
     phone?: StringNullableFilter<"Resume"> | string | null
     email?: StringNullableFilter<"Resume"> | string | null
+    skill?: StringNullableListFilter<"Resume">
     createdAt?: DateTimeFilter<"Resume"> | Date | string
     updatedAt?: DateTimeFilter<"Resume"> | Date | string
     workExperiences?: WorkExperienceListRelationFilter
@@ -4746,6 +4757,7 @@ export namespace Prisma {
     country?: SortOrderInput | SortOrder
     phone?: SortOrderInput | SortOrder
     email?: SortOrderInput | SortOrder
+    skill?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     workExperiences?: WorkExperienceOrderByRelationAggregateInput
@@ -4771,6 +4783,7 @@ export namespace Prisma {
     country?: StringNullableFilter<"Resume"> | string | null
     phone?: StringNullableFilter<"Resume"> | string | null
     email?: StringNullableFilter<"Resume"> | string | null
+    skill?: StringNullableListFilter<"Resume">
     createdAt?: DateTimeFilter<"Resume"> | Date | string
     updatedAt?: DateTimeFilter<"Resume"> | Date | string
     workExperiences?: WorkExperienceListRelationFilter
@@ -4793,6 +4806,7 @@ export namespace Prisma {
     country?: SortOrderInput | SortOrder
     phone?: SortOrderInput | SortOrder
     email?: SortOrderInput | SortOrder
+    skill?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: ResumeCountOrderByAggregateInput
@@ -4819,6 +4833,7 @@ export namespace Prisma {
     country?: StringNullableWithAggregatesFilter<"Resume"> | string | null
     phone?: StringNullableWithAggregatesFilter<"Resume"> | string | null
     email?: StringNullableWithAggregatesFilter<"Resume"> | string | null
+    skill?: StringNullableListFilter<"Resume">
     createdAt?: DateTimeWithAggregatesFilter<"Resume"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Resume"> | Date | string
   }
@@ -4989,6 +5004,7 @@ export namespace Prisma {
     country?: string | null
     phone?: string | null
     email?: string | null
+    skill?: ResumeCreateskillInput | string[]
     createdAt?: Date | string
     updatedAt?: Date | string
     workExperiences?: WorkExperienceCreateNestedManyWithoutResumeInput
@@ -5011,6 +5027,7 @@ export namespace Prisma {
     country?: string | null
     phone?: string | null
     email?: string | null
+    skill?: ResumeCreateskillInput | string[]
     createdAt?: Date | string
     updatedAt?: Date | string
     workExperiences?: WorkExperienceUncheckedCreateNestedManyWithoutResumeInput
@@ -5033,6 +5050,7 @@ export namespace Prisma {
     country?: NullableStringFieldUpdateOperationsInput | string | null
     phone?: NullableStringFieldUpdateOperationsInput | string | null
     email?: NullableStringFieldUpdateOperationsInput | string | null
+    skill?: ResumeUpdateskillInput | string[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     workExperiences?: WorkExperienceUpdateManyWithoutResumeNestedInput
@@ -5055,6 +5073,7 @@ export namespace Prisma {
     country?: NullableStringFieldUpdateOperationsInput | string | null
     phone?: NullableStringFieldUpdateOperationsInput | string | null
     email?: NullableStringFieldUpdateOperationsInput | string | null
+    skill?: ResumeUpdateskillInput | string[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     workExperiences?: WorkExperienceUncheckedUpdateManyWithoutResumeNestedInput
@@ -5077,6 +5096,7 @@ export namespace Prisma {
     country?: string | null
     phone?: string | null
     email?: string | null
+    skill?: ResumeCreateskillInput | string[]
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -5097,6 +5117,7 @@ export namespace Prisma {
     country?: NullableStringFieldUpdateOperationsInput | string | null
     phone?: NullableStringFieldUpdateOperationsInput | string | null
     email?: NullableStringFieldUpdateOperationsInput | string | null
+    skill?: ResumeUpdateskillInput | string[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -5117,6 +5138,7 @@ export namespace Prisma {
     country?: NullableStringFieldUpdateOperationsInput | string | null
     phone?: NullableStringFieldUpdateOperationsInput | string | null
     email?: NullableStringFieldUpdateOperationsInput | string | null
+    skill?: ResumeUpdateskillInput | string[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -5317,6 +5339,14 @@ export namespace Prisma {
     not?: NestedStringNullableFilter<$PrismaModel> | string | null
   }
 
+  export type StringNullableListFilter<$PrismaModel = never> = {
+    equals?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    has?: string | StringFieldRefInput<$PrismaModel> | null
+    hasEvery?: string[] | ListStringFieldRefInput<$PrismaModel>
+    hasSome?: string[] | ListStringFieldRefInput<$PrismaModel>
+    isEmpty?: boolean
+  }
+
   export type DateTimeFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
@@ -5369,6 +5399,7 @@ export namespace Prisma {
     country?: SortOrder
     phone?: SortOrder
     email?: SortOrder
+    skill?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -5540,6 +5571,10 @@ export namespace Prisma {
     updatedAt?: SortOrder
   }
 
+  export type ResumeCreateskillInput = {
+    set: string[]
+  }
+
   export type WorkExperienceCreateNestedManyWithoutResumeInput = {
     create?: XOR<WorkExperienceCreateWithoutResumeInput, WorkExperienceUncheckedCreateWithoutResumeInput> | WorkExperienceCreateWithoutResumeInput[] | WorkExperienceUncheckedCreateWithoutResumeInput[]
     connectOrCreate?: WorkExperienceCreateOrConnectWithoutResumeInput | WorkExperienceCreateOrConnectWithoutResumeInput[]
@@ -5574,6 +5609,11 @@ export namespace Prisma {
 
   export type NullableStringFieldUpdateOperationsInput = {
     set?: string | null
+  }
+
+  export type ResumeUpdateskillInput = {
+    set?: string[]
+    push?: string | string[]
   }
 
   export type DateTimeFieldUpdateOperationsInput = {
@@ -5915,6 +5955,7 @@ export namespace Prisma {
     country?: string | null
     phone?: string | null
     email?: string | null
+    skill?: ResumeCreateskillInput | string[]
     createdAt?: Date | string
     updatedAt?: Date | string
     educations?: EducationCreateNestedManyWithoutResumeInput
@@ -5936,6 +5977,7 @@ export namespace Prisma {
     country?: string | null
     phone?: string | null
     email?: string | null
+    skill?: ResumeCreateskillInput | string[]
     createdAt?: Date | string
     updatedAt?: Date | string
     educations?: EducationUncheckedCreateNestedManyWithoutResumeInput
@@ -5973,6 +6015,7 @@ export namespace Prisma {
     country?: NullableStringFieldUpdateOperationsInput | string | null
     phone?: NullableStringFieldUpdateOperationsInput | string | null
     email?: NullableStringFieldUpdateOperationsInput | string | null
+    skill?: ResumeUpdateskillInput | string[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     educations?: EducationUpdateManyWithoutResumeNestedInput
@@ -5994,6 +6037,7 @@ export namespace Prisma {
     country?: NullableStringFieldUpdateOperationsInput | string | null
     phone?: NullableStringFieldUpdateOperationsInput | string | null
     email?: NullableStringFieldUpdateOperationsInput | string | null
+    skill?: ResumeUpdateskillInput | string[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     educations?: EducationUncheckedUpdateManyWithoutResumeNestedInput
@@ -6015,6 +6059,7 @@ export namespace Prisma {
     country?: string | null
     phone?: string | null
     email?: string | null
+    skill?: ResumeCreateskillInput | string[]
     createdAt?: Date | string
     updatedAt?: Date | string
     workExperiences?: WorkExperienceCreateNestedManyWithoutResumeInput
@@ -6036,6 +6081,7 @@ export namespace Prisma {
     country?: string | null
     phone?: string | null
     email?: string | null
+    skill?: ResumeCreateskillInput | string[]
     createdAt?: Date | string
     updatedAt?: Date | string
     workExperiences?: WorkExperienceUncheckedCreateNestedManyWithoutResumeInput
@@ -6073,6 +6119,7 @@ export namespace Prisma {
     country?: NullableStringFieldUpdateOperationsInput | string | null
     phone?: NullableStringFieldUpdateOperationsInput | string | null
     email?: NullableStringFieldUpdateOperationsInput | string | null
+    skill?: ResumeUpdateskillInput | string[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     workExperiences?: WorkExperienceUpdateManyWithoutResumeNestedInput
@@ -6094,6 +6141,7 @@ export namespace Prisma {
     country?: NullableStringFieldUpdateOperationsInput | string | null
     phone?: NullableStringFieldUpdateOperationsInput | string | null
     email?: NullableStringFieldUpdateOperationsInput | string | null
+    skill?: ResumeUpdateskillInput | string[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     workExperiences?: WorkExperienceUncheckedUpdateManyWithoutResumeNestedInput
