@@ -11,8 +11,13 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { EditorFormProps } from "@/lib/types";
+import { useEffect } from "react";
 
-export default function GeneralInfoForm() {
+export default function GeneralInfoForm({
+  resumeData,
+  setResumeData,
+}: EditorFormProps) {
   const form = useForm<GeneralInfoValues>({
     resolver: zodResolver(generalInfoSchema),
     defaultValues: {
@@ -20,6 +25,21 @@ export default function GeneralInfoForm() {
       description: "",
     },
   });
+
+    useEffect(() => {
+      // Get the current unsubscribe function
+      const subscription = form.watch((values) => {
+        // Update your resume preview state here
+        // Example: updateResumePreview(values);
+        console.log("Updating preview with:", values);
+        setResumeData({
+          ...resumeData,
+          ...values,
+        });
+      });
+      // Cleanup function
+      return () => subscription.unsubscribe();
+    }, [form, resumeData, setResumeData]);
 
   return (
     <div className="max-w-xl mx-auto space-y-6">

@@ -1,11 +1,12 @@
 // Importing form components for each step
+import { EditorFormProps } from "@/lib/types";
 import GeneralInfoForm from "./forms/GeneralInfoForm";
 import PersonalInfoForm from "./forms/PersonalInfoForm";
 
 // Define the steps configuration for a multi-step form process
 export const steps: {
     title: string;        // Display title for the step
-    component: React.ComponentType;  // React component to render for this step
+    component: React.ComponentType<EditorFormProps>;  // React component to render for this step
     key: string;          // Unique identifier for the step
 }[] = [
     {

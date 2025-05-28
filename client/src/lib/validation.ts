@@ -11,7 +11,6 @@ export const generalInfoSchema = z.object({
 // TypeScript type automatically generated from the schema
 export type GeneralInfoValues = z.infer<typeof generalInfoSchema>;
 
-
 // Personal Information Schema
 export const personalInfoSchema = z.object({
   firstName: optionalString,
@@ -21,15 +20,27 @@ export const personalInfoSchema = z.object({
   country: optionalString,
   phone: optionalString,
   email: optionalString,
-  photo: z.custom<File | undefined>()
-  .refine(
-    (file) => !file || (file instanceof File && file.type.startsWith("image/")),
-    "Must be a valid image file"
-  )
-  .refine(
-    (file) => !file || (file && file.size <= 1024 * 1024 * 4),
-    "File size must be less than 4MB"
-  )
+  photo: z
+    .custom<File | undefined>()
+    .refine(
+      (file) =>
+        !file || (file instanceof File && file.type.startsWith("image/")),
+      "Must be a valid image file",
+    )
+    .refine(
+      (file) => !file || (file && file.size <= 1024 * 1024 * 4),
+      "File size must be less than 4MB",
+    ),
 });
 // TypeScript type automatically generated from the schema
 export type PersonalInfoValues = z.infer<typeof personalInfoSchema>;
+
+export const resumeSchema = z.object({
+  ...generalInfoSchema.shape,
+  ...personalInfoSchema.shape,
+});
+
+export type ResumeValues = Omit<z.infer<typeof resumeSchema>, "photo"> & {
+  id?: string;
+  photo?: File | string | null;
+};

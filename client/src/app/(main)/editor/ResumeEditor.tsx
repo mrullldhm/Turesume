@@ -4,12 +4,14 @@ import { useSearchParams } from "next/navigation";
 import { steps } from "./step";
 import Breadcrumbs from "./Breadcrumbs";
 import Footer from "./Footer";
+import { useState } from "react";
+import { ResumeValues } from "@/lib/validation";
 
 export default function ResumeEditor() {
   const searchParams = useSearchParams(); // Get current search parameters from the URL
   
-  
-  
+  const [resumeData, setResumeData] = useState<ResumeValues>({}); // State to hold resume data
+
   const currentStep = searchParams.get("step") || steps[0].key;
 
   function setStep(key: string) {
@@ -41,7 +43,10 @@ export default function ResumeEditor() {
             {/* <GeneralInfoForm />
             <PersonalInfoForm /> */}
             <Breadcrumbs currentStep={currentStep} setCurrentStep={setStep} />
-            {FormComponent && <FormComponent />}
+            {FormComponent && <FormComponent 
+            resumeData={resumeData}
+            setResumeData={setResumeData}
+            />}
           </div>
 
           {/* Vertical Divider (Visible only on desktop) */}
