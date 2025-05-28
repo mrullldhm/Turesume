@@ -37,23 +37,43 @@ export type PersonalInfoValues = z.infer<typeof personalInfoSchema>;
 
 // Work Experience Schema
 export const workExperienceSchema = z.object({
- workExperiences: z.array(
-  z.object({
-     position: optionalString,
-     company: optionalString,
-     startDate: optionalString,
-     endDate: optionalString,
-     description: optionalString,
-   })
- ).optional(),
+  workExperiences: z
+    .array(
+      z.object({
+        position: optionalString,
+        company: optionalString,
+        startDate: optionalString,
+        endDate: optionalString,
+        description: optionalString,
+      }),
+    )
+    .optional(),
 });
 // TypeScript type automatically generated from the schema
 export type WorkExperienceValues = z.infer<typeof workExperienceSchema>;
+
+// Education Schema
+export const educationSchema = z.object({
+  educations: z
+    .array(
+      z.object({
+        institution: optionalString,
+        fieldOfStudy: optionalString,
+        startDate: optionalString,
+        endDate: optionalString,
+        description: optionalString,
+      }),
+    )
+    .optional(),
+});
+// TypeScript type automatically generated from the schema
+export type EducationValues = z.infer<typeof educationSchema>;
 
 export const resumeSchema = z.object({
   ...generalInfoSchema.shape,
   ...personalInfoSchema.shape,
   ...workExperienceSchema.shape,
+  ...educationSchema.shape,
 });
 
 export type ResumeValues = Omit<z.infer<typeof resumeSchema>, "photo"> & {

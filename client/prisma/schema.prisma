@@ -36,6 +36,7 @@ model Resume {
   email String?
 
   workExperiences WorkExperience[]
+  educations Education[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -55,8 +56,26 @@ model WorkExperience {
   resumeId String
   resume Resume @relation(fields: [resumeId], references: [id])
 
-    createdAt DateTime @default(now())
+  createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
   @@map("work_experiences")
+}
+
+model Education {
+  id String @id @default (cuid())
+
+  institution String?
+  fieldOfStudy String?
+  startDate String?
+  endDate String?
+  description String
+
+  resumeId String
+  resume Resume @relation(fields: [resumeId], references: [id])
+  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("educations")
 }
