@@ -35,6 +35,8 @@ export const personalInfoSchema = z.object({
 // TypeScript type automatically generated from the schema
 export type PersonalInfoValues = z.infer<typeof personalInfoSchema>;
 
+// Work Experience Schema
+
 export const resumeSchema = z.object({
   ...generalInfoSchema.shape,
   ...personalInfoSchema.shape,

@@ -53,7 +53,9 @@ export default function ResumeEditor() {
           <div className="grow md:border-r"></div>
 
           {/* Right Panel - Preview (Hidden on mobile, half width on desktop) */}
-          <div className="hidden md:flex w-1/2">Right Side</div>
+          <div className="hidden md:flex w-1/2">
+          <pre>{JSON.stringify(resumeData, null, 2)}</pre>
+          </div>
         </div>
       </main>
       <Footer currentStep={currentStep} setCurrentStep={setStep} />
