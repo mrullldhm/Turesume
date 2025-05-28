@@ -1,3 +1,4 @@
+import { start } from "repl";
 import { z } from "zod";
 
 // A string that can be empty, undefined, or a trimmed string
@@ -36,10 +37,24 @@ export const personalInfoSchema = z.object({
 export type PersonalInfoValues = z.infer<typeof personalInfoSchema>;
 
 // Work Experience Schema
+export const workExperienceSchema = z.object({
+ workExperiences: z.array(
+  z.object({
+     position: optionalString,
+     company: optionalString,
+     startDate: optionalString,
+     endDate: optionalString,
+     description: optionalString,
+   })
+ ).optional(),
+});
+// TypeScript type automatically generated from the schema
+export type WorkExperienceValues = z.infer<typeof workExperienceSchema>;
 
 export const resumeSchema = z.object({
   ...generalInfoSchema.shape,
   ...personalInfoSchema.shape,
+  ...workExperienceSchema.shape,
 });
 
 export type ResumeValues = Omit<z.infer<typeof resumeSchema>, "photo"> & {
