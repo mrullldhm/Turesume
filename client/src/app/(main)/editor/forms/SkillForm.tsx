@@ -45,7 +45,7 @@ export default function SkillForm({
   }, [form, resumeData, setResumeData]);
 
   return (
-    <div className="max=2=xl mx auto space-y-6">
+    <div className="max-w-xl mx-auto space-y-6">
       <div className="space-y-1.5 text-center">
         <h2 className="text-2xl font-semibold">Skills</h2>
         <p className="text-sm text-muted-foreground">
@@ -63,10 +63,11 @@ export default function SkillForm({
                 <FormControl>
                   <Textarea
                     {...field}
-                    placeholder="React.js , Next.js , Tailwind CSS , TypeScript"
+                    placeholder="e.g. Communication, Project Management, Microsoft Excel, Problem Solving"
+                    autoFocus
                     onChange={(e) => {
-                        const skills = e.target.value.split(",");
-                        field.onChange(skills);
+                      const skills = e.target.value.split(",");
+                      field.onChange(skills);
                     }}
                   />
                 </FormControl>

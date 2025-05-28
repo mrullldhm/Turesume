@@ -20,7 +20,6 @@ export default function WorkExperienceForm({
   resumeData,
   setResumeData,
 }: EditorFormProps) {
-  
   const form = useForm<WorkExperienceValues>({
     resolver: zodResolver(workExperienceSchema),
     defaultValues: {
@@ -109,7 +108,7 @@ function WorkExperienceItem({ form, index, remove }: WorkExperienceItemProps) {
           <FormItem>
             <FormLabel>Position</FormLabel>
             <FormControl>
-              <Input {...field} autoFocus />
+              <Input {...field} placeholder="e.g., Sales Associate" autoFocus />
             </FormControl>
           </FormItem>
         )}
@@ -121,7 +120,7 @@ function WorkExperienceItem({ form, index, remove }: WorkExperienceItemProps) {
           <FormItem>
             <FormLabel>Company</FormLabel>
             <FormControl>
-              <Input {...field} />
+              <Input {...field} placeholder="e.g., ABC Retail Ltd." />
             </FormControl>
           </FormItem>
         )}
@@ -138,6 +137,7 @@ function WorkExperienceItem({ form, index, remove }: WorkExperienceItemProps) {
                   {...field}
                   type="date"
                   value={field.value?.slice(0, 10)}
+                  placeholder=""
                 />
               </FormControl>
             </FormItem>
@@ -174,13 +174,18 @@ function WorkExperienceItem({ form, index, remove }: WorkExperienceItemProps) {
             <FormItem>
               <FormLabel>Description</FormLabel>
               <FormControl>
-                <Textarea {...field} />
+                <Textarea
+                  {...field}
+                  placeholder="e.g., Managed daily customer interactions, boosted monthly sales by 20%, and trained new employees."
+                />
               </FormControl>
             </FormItem>
           )}
         />
-        <Button variant="destructive" onClick={() => remove(index)}>Remove</Button>
       </div>
+      <Button variant="destructive" onClick={() => remove(index)}>
+        Remove
+      </Button>
     </div>
   );
 }

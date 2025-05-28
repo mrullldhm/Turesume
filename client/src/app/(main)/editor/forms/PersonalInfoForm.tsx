@@ -78,6 +78,7 @@ export default function PersonalInfoForm({
                       const file = e.target.files?.[0];
                       fieldValues.onChange(file);
                     }}
+                    autoFocus
                   />
                 </FormControl>
                 <FormMessage />
@@ -119,7 +120,7 @@ export default function PersonalInfoForm({
               <FormItem>
                 <FormLabel>Job Title</FormLabel>
                 <FormControl>
-                  <Input {...field} placeholder="e.g., Web Developer" />
+                  <Input {...field} placeholder="e.g., Marketing Manager" />
                 </FormControl>
                 <FormMessage />
               </FormItem>

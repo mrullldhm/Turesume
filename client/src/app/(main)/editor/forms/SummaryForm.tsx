@@ -1,6 +1,3 @@
-import { useForm } from "react-hook-form";
-import { generalInfoSchema, GeneralInfoValues } from "@/lib/validation";
-import { zodResolver } from "@hookform/resolvers/zod";
 import {
   Form,
   FormControl,
@@ -9,19 +6,21 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
 import { EditorFormProps } from "@/lib/types";
+import { summarySchema, SummaryValues } from "@/lib/validation";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { useEffect } from "react";
+import { useForm } from "react-hook-form";
 
-export default function GeneralInfoForm({
+export default function SummaryForm({
   resumeData,
   setResumeData,
 }: EditorFormProps) {
-  const form = useForm<GeneralInfoValues>({
-    resolver: zodResolver(generalInfoSchema),
+  const form = useForm<SummaryValues>({
+    resolver: zodResolver(summarySchema),
     defaultValues: {
-      title: resumeData.title || "",
-      description: resumeData.description || "",
+      summary: resumeData.summary || "",
     },
   });
 
@@ -43,40 +42,25 @@ export default function GeneralInfoForm({
   return (
     <div className="max-w-xl mx-auto space-y-6">
       <div className="space-y-1.5 text-center">
-        <h2 className="text-2xl font-semibold">General Information</h2>
+        <h2 className="text-2xl font-semibold">Professional Summary</h2>
         <p className="text-sm text-muted-foreground">
-          This information will not be included in the resume.
+          Summarize your professional background—or let AI create one from your
+          details
         </p>
       </div>
       <Form {...form}>
         <form className="space-y-6">
           <FormField
             control={form.control}
-            name="title"
+            name="summary"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Resume Project Title</FormLabel>
+                <FormLabel className="sr-only">Professional Summary</FormLabel>
                 <FormControl>
-                  <Input
+                  <Textarea
                     {...field}
-                    placeholder="e.g., Marketing Manager Resume"
+                    placeholder="e.g. Dedicated professional with experience in customer service and team leadership, focused on delivering excellent results."
                     autoFocus
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="description"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Description</FormLabel>
-                <FormControl>
-                  <Input
-                    {...field}
-                    placeholder="e.g., Resume for a managerial position in the retail industry"
                   />
                 </FormControl>
                 <FormMessage />

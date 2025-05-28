@@ -4,7 +4,14 @@ import { useFieldArray, useForm, UseFormReturn } from "react-hook-form";
 import { educationSchema, EducationValues } from "@/lib/validation";
 import { useEffect } from "react";
 import { GripHorizontal } from "lucide-react";
-import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel } from "@/components/ui/form";
+import {
+  Form,
+  FormControl,
+  FormDescription,
+  FormField,
+  FormItem,
+  FormLabel,
+} from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
@@ -45,7 +52,7 @@ export default function EducationForm({
       <div className="space-y-1.5 text-center">
         <h2 className="text-2xl font-semibold">Education</h2>
         <p className="text-sm text-muted-foreground">
-            Add as many education experiences as you have
+          Add as many education experiences as you have
         </p>
       </div>
       <Form {...form}>
@@ -100,7 +107,11 @@ function EducationItem({ form, index, remove }: EducationItemProps) {
           <FormItem>
             <FormLabel>Institution</FormLabel>
             <FormControl>
-              <Input {...field} autoFocus />
+              <Input
+                {...field}
+                placeholder="e.g., University of XYZ"
+                autoFocus
+              />
             </FormControl>
           </FormItem>
         )}
@@ -112,7 +123,7 @@ function EducationItem({ form, index, remove }: EducationItemProps) {
           <FormItem>
             <FormLabel>Field of Study</FormLabel>
             <FormControl>
-              <Input {...field} />
+              <Input {...field} placeholder="e.g., Business Administration" />
             </FormControl>
           </FormItem>
         )}
@@ -165,15 +176,18 @@ function EducationItem({ form, index, remove }: EducationItemProps) {
             <FormItem>
               <FormLabel>Description</FormLabel>
               <FormControl>
-                <Textarea {...field} />
+                <Textarea
+                  {...field}
+                  placeholder="e.g., Graduated with honors, led student clubs, and completed a thesis on marketing strategies."
+                />
               </FormControl>
             </FormItem>
           )}
         />
-        <Button variant="destructive" onClick={() => remove(index)}>
-          Remove
-        </Button>
       </div>
+      <Button variant="destructive" onClick={() => remove(index)}>
+        Remove
+      </Button>
     </div>
   );
 }
