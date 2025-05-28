@@ -4,7 +4,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -50,7 +49,7 @@ export default function GeneralInfoForm({
         </p>
       </div>
       <Form {...form}>
-        <form className="space-y-3" action="">
+        <form className="space-y-6" action="">
           <FormField
             control={form.control}
             name="title"
@@ -64,9 +63,6 @@ export default function GeneralInfoForm({
                     autoFocus
                   />
                 </FormControl>
-                <FormDescription>
-                  A clear name to identify this resume project.
-                </FormDescription>
                 <FormMessage />
               </FormItem>
             )}
@@ -83,9 +79,6 @@ export default function GeneralInfoForm({
                     placeholder="e.g., Resume for senior developer role at Tech Corp"
                   />
                 </FormControl>
-                <FormDescription>
-                  Provide a brief overview of the resume projects purpose.
-                </FormDescription>
                 <FormMessage />
               </FormItem>
             )}

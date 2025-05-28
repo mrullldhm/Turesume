@@ -62,7 +62,7 @@ export default function PersonalInfoForm({
         <p className="text-sm text-muted-foreground">Tell us about yourself</p>
       </div>
       <Form {...form}>
-        <form className="space-y-3">
+        <form className="space-y-6">
           <FormField
             control={form.control}
             name="photo"
