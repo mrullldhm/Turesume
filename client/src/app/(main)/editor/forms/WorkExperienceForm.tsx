@@ -177,6 +177,7 @@ function WorkExperienceItem({ form, index, remove }: WorkExperienceItemProps) {
                 <Textarea
                   {...field}
                   placeholder="e.g., Managed daily customer interactions, boosted monthly sales by 20%, and trained new employees."
+                  className="h-32"
                 />
               </FormControl>
             </FormItem>

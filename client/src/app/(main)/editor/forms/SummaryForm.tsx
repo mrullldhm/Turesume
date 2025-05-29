@@ -61,6 +61,7 @@ export default function SummaryForm({
                     {...field}
                     placeholder="e.g. Dedicated professional with experience in customer service and team leadership, focused on delivering excellent results."
                     autoFocus
+                    className="h-40"
                   />
                 </FormControl>
                 <FormMessage />

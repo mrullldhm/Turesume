@@ -179,6 +179,8 @@ function EducationItem({ form, index, remove }: EducationItemProps) {
                 <Textarea
                   {...field}
                   placeholder="e.g., Graduated with honors, led student clubs, and completed a thesis on marketing strategies."
+                                    className="h-32"
+
                 />
               </FormControl>
             </FormItem>
