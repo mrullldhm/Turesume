@@ -6,6 +6,7 @@ import Breadcrumbs from "./Breadcrumbs";
 import Footer from "./Footer";
 import { useState } from "react";
 import { ResumeValues } from "@/lib/validation";
+import ResumePreviewSection from "./ResumePreviewSection";
 
 export default function ResumeEditor() {
   const searchParams = useSearchParams(); // Get current search parameters from the URL
@@ -52,12 +53,13 @@ export default function ResumeEditor() {
           </div>
 
           {/* Vertical Divider (Visible only on desktop) */}
-          <div className="grow md:border-r"></div>
+          <div className="grow md:border-r" />
 
           {/* Right Panel - Preview (Hidden on mobile, half width on desktop) */}
-          <div className="hidden md:flex w-1/2 overflow-y-auto">
-            <pre>{JSON.stringify(resumeData, null, 2)}</pre>
-          </div>
+        <ResumePreviewSection 
+          resumeData={resumeData}
+          setResumeData={setResumeData}
+        />
         </div>
       </main>
       <Footer currentStep={currentStep} setCurrentStep={setStep} />

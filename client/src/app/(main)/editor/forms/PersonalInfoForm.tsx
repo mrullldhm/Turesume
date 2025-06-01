@@ -78,7 +78,6 @@ export default function PersonalInfoForm({
                       const file = e.target.files?.[0];
                       fieldValues.onChange(file);
                     }}
-                    autoFocus
                   />
                 </FormControl>
                 <FormMessage />
