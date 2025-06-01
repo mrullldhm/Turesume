@@ -108,7 +108,7 @@ function WorkExperienceItem({ form, index, remove }: WorkExperienceItemProps) {
           <FormItem>
             <FormLabel>Position</FormLabel>
             <FormControl>
-              <Input {...field} placeholder="e.g., Sales Associate" autoFocus />
+              <Input {...field} placeholder="e.g., Sales Associate" />
             </FormControl>
           </FormItem>
         )}

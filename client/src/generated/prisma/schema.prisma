@@ -26,7 +26,6 @@ model Resume {
   photoUrl    String?
   colorHex    String  @default("#000000")
   borderStyle String  @default("squircle")
-  summary     String?
   firstName   String?
   lastName    String?
   jobTittle   String?
@@ -38,8 +37,11 @@ model Resume {
   workExperiences WorkExperience[]
   educations      Education[]
   awards          Award[]
+  certificates    Certificate[]
+  projects        Project[]
 
-  skill String[]
+  skill   String[]
+  summary String?
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -98,4 +100,40 @@ model Award {
   updatedAt DateTime @updatedAt
 
   @@map("awards")
+}
+
+model Certificate {
+  id String @id @default(cuid())
+
+  title         String
+  issuer        String
+  issueDate     String?
+  credentialId  String?
+  credentialUrl String?
+  description   String?
+
+  resumeId String
+  resume   Resume @relation(fields: [resumeId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("certificates")
+}
+
+model Project {
+  id String @id @default(cuid())
+
+  title           String
+  publicationDate String?
+  publicationUrl  String?
+  description     String?
+
+  resumeId String
+  resume   Resume @relation(fields: [resumeId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("projects")
 }

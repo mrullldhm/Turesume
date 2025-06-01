@@ -85,6 +85,40 @@ export const awardSchema = z.object({
 // TypeScript type automatically generated from the schema
 export type AwardValues = z.infer<typeof awardSchema>;
 
+// Certificate Schema
+export const certificateSchema = z.object({
+  certificates: z
+    .array(
+      z.object({
+        title: optionalString,
+        issuer: optionalString,
+        issueDate: optionalString,
+        credentialId: optionalString,
+        credentialUrl: optionalString,
+        description: optionalString,
+      }),
+    )
+    .optional(),
+});
+// TypeScript type automatically generated from the schema
+export type CertificateValues = z.infer<typeof certificateSchema>;
+
+// Project Schema
+export const projectSchema = z.object({
+  projects: z
+    .array(
+      z.object({
+        title: optionalString,
+        publicationDate: optionalString,
+        publicationUrl: optionalString,
+        description: optionalString,
+      }),
+    )
+    .optional(),
+});
+// TypeScript type automatically generated from the schema
+export type ProjectValues = z.infer<typeof projectSchema>;
+
 // Skills Schema
 export const skillsSchema = z.object({
   skills: z.array(z.string().trim()).optional(),
@@ -105,6 +139,8 @@ export const resumeSchema = z.object({
   ...workExperienceSchema.shape,
   ...educationSchema.shape,
   ...awardSchema.shape,
+  ...certificateSchema.shape,
+  ...projectSchema.shape,
   ...skillsSchema.shape,
   ...summarySchema.shape,
 });

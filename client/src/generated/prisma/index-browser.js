@@ -128,7 +128,6 @@ exports.Prisma.ResumeScalarFieldEnum = {
   photoUrl: 'photoUrl',
   colorHex: 'colorHex',
   borderStyle: 'borderStyle',
-  summary: 'summary',
   firstName: 'firstName',
   lastName: 'lastName',
   jobTittle: 'jobTittle',
@@ -137,6 +136,7 @@ exports.Prisma.ResumeScalarFieldEnum = {
   phone: 'phone',
   email: 'email',
   skill: 'skill',
+  summary: 'summary',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -176,6 +176,30 @@ exports.Prisma.AwardScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.CertificateScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  issuer: 'issuer',
+  issueDate: 'issueDate',
+  credentialId: 'credentialId',
+  credentialUrl: 'credentialUrl',
+  description: 'description',
+  resumeId: 'resumeId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.ProjectScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  publicationDate: 'publicationDate',
+  publicationUrl: 'publicationUrl',
+  description: 'description',
+  resumeId: 'resumeId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -196,7 +220,9 @@ exports.Prisma.ModelName = {
   Resume: 'Resume',
   WorkExperience: 'WorkExperience',
   Education: 'Education',
-  Award: 'Award'
+  Award: 'Award',
+  Certificate: 'Certificate',
+  Project: 'Project'
 };
 
 /**

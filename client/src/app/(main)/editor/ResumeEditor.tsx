@@ -9,7 +9,7 @@ import { ResumeValues } from "@/lib/validation";
 
 export default function ResumeEditor() {
   const searchParams = useSearchParams(); // Get current search parameters from the URL
-  
+
   const [resumeData, setResumeData] = useState<ResumeValues>({}); // State to hold resume data
 
   const currentStep = searchParams.get("step") || steps[0].key;
@@ -43,18 +43,20 @@ export default function ResumeEditor() {
             {/* <GeneralInfoForm />
             <PersonalInfoForm /> */}
             <Breadcrumbs currentStep={currentStep} setCurrentStep={setStep} />
-            {FormComponent && <FormComponent 
-            resumeData={resumeData}
-            setResumeData={setResumeData}
-            />}
+            {FormComponent && (
+              <FormComponent
+                resumeData={resumeData}
+                setResumeData={setResumeData}
+              />
+            )}
           </div>
 
           {/* Vertical Divider (Visible only on desktop) */}
           <div className="grow md:border-r"></div>
 
           {/* Right Panel - Preview (Hidden on mobile, half width on desktop) */}
-          <div className="hidden md:flex w-1/2">
-          <pre>{JSON.stringify(resumeData, null, 2)}</pre>
+          <div className="hidden md:flex w-1/2 overflow-y-auto">
+            <pre>{JSON.stringify(resumeData, null, 2)}</pre>
           </div>
         </div>
       </main>
