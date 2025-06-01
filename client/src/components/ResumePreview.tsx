@@ -32,6 +32,8 @@ export default function ResumePreview({
         }}
       >
         <PersonalInfoHeader resumeData={resumeData} />
+        <SummarySection resumeData={resumeData} />
+        <WorkExperienceSection resumeData={resumeData} />
       </div>
     </div>
   );
@@ -90,7 +92,37 @@ function SummarySection({ resumeData }: ResumeSectionProps) {
   return (
     <>
       <hr className="border-2" />
-      <div></div>
+      <div className="spacce-y-3 break-inside-avoid">
+        <p className="text-2xl text-sky-900">About Me</p>
+        <div className="whitespace-pre-line text-xs">{summary}</div>
+      </div>
+    </>
+  );
+}
+
+function WorkExperienceSection({ resumeData }: ResumeSectionProps) {
+  const { workExperiences } = resumeData;
+
+  const workExperiencesNotEmpty = workExperiences?.filter(
+    (exp) => Object.values(exp).filter(Boolean).length > 0,
+  );
+
+  if (!workExperiencesNotEmpty?.length) return null;
+
+  return (
+    <>
+      <hr className="border-2" />
+      <div className="spacce-y-3">
+        <p className="text-2xl text-sky-900">Experience</p>
+        {workExperiencesNotEmpty.map((exp, index) => (
+          <div key={index} className="break-inside-avoid space-y-1">
+            <div className="flex items-center justify-between text-xs">
+                <span className="text-base font-semibold">{exp.position}</span>
+                
+            </div>
+          </div>
+        ))}
+      </div>
     </>
   );
 }
