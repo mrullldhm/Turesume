@@ -107,11 +107,7 @@ function EducationItem({ form, index, remove }: EducationItemProps) {
           <FormItem>
             <FormLabel>Institution</FormLabel>
             <FormControl>
-              <Input
-                {...field}
-                placeholder="e.g., University of XYZ"
-                autoFocus
-              />
+              <Input {...field} placeholder="e.g., University of XYZ" />
             </FormControl>
           </FormItem>
         )}
@@ -179,8 +175,7 @@ function EducationItem({ form, index, remove }: EducationItemProps) {
                 <Textarea
                   {...field}
                   placeholder="e.g., Graduated with honors, led student clubs, and completed a thesis on marketing strategies."
-                                    className="h-32"
-
+                  className="h-32"
                 />
               </FormControl>
             </FormItem>

@@ -22,7 +22,7 @@ export default function AwardForm({
   const form = useForm<AwardValues>({
     resolver: zodResolver(awardSchema),
     defaultValues: {
-      awards: resumeData.educations || [],
+      awards: resumeData.awards || [],
     },
   });
 
@@ -105,11 +105,7 @@ function AwardItem({ form, index, remove }: AwardItemProps) {
           <FormItem>
             <FormLabel>Title</FormLabel>
             <FormControl>
-              <Input
-                {...field}
-                placeholder="e.g., Best Employee of the Year"
-                autoFocus
-              />
+              <Input {...field} placeholder="e.g., Best Employee of the Year" />
             </FormControl>
           </FormItem>
         )}
