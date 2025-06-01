@@ -6,6 +6,7 @@ import WorkExperienceForm from "./forms/WorkExperienceForm";
 import EducationForm from "./forms/EducationForm";
 import SkillForm from "./forms/SkillForm";
 import SummaryForm from "./forms/SummaryForm";
+import AwardForm from "./forms/AwardForm";
 
 // Define the steps configuration for a multi-step form process
 export const steps: {
@@ -32,6 +33,11 @@ export const steps: {
     title: "Education", // Fourth step - Education
     component: EducationForm, // Placeholder component
     key: "education", // Unique key for this step
+  },
+  {
+    title: "Award", // Fifth step - Skills
+    component: AwardForm, // Placeholder component
+    key: "awards", // Unique key for this step
   },
   {
     title: "Skills", // Fifth step - Skills

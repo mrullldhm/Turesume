@@ -28,6 +28,11 @@ export type WorkExperience = $Result.DefaultSelection<Prisma.$WorkExperiencePayl
  * 
  */
 export type Education = $Result.DefaultSelection<Prisma.$EducationPayload>
+/**
+ * Model Award
+ * 
+ */
+export type Award = $Result.DefaultSelection<Prisma.$AwardPayload>
 
 /**
  * ##  Prisma Client ʲˢ
@@ -183,6 +188,16 @@ export class PrismaClient<
     * ```
     */
   get education(): Prisma.EducationDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.award`: Exposes CRUD operations for the **Award** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Awards
+    * const awards = await prisma.award.findMany()
+    * ```
+    */
+  get award(): Prisma.AwardDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -625,7 +640,8 @@ export namespace Prisma {
   export const ModelName: {
     Resume: 'Resume',
     WorkExperience: 'WorkExperience',
-    Education: 'Education'
+    Education: 'Education',
+    Award: 'Award'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -644,7 +660,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "resume" | "workExperience" | "education"
+      modelProps: "resume" | "workExperience" | "education" | "award"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -870,6 +886,80 @@ export namespace Prisma {
           }
         }
       }
+      Award: {
+        payload: Prisma.$AwardPayload<ExtArgs>
+        fields: Prisma.AwardFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.AwardFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AwardPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.AwardFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AwardPayload>
+          }
+          findFirst: {
+            args: Prisma.AwardFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AwardPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.AwardFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AwardPayload>
+          }
+          findMany: {
+            args: Prisma.AwardFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AwardPayload>[]
+          }
+          create: {
+            args: Prisma.AwardCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AwardPayload>
+          }
+          createMany: {
+            args: Prisma.AwardCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.AwardCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AwardPayload>[]
+          }
+          delete: {
+            args: Prisma.AwardDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AwardPayload>
+          }
+          update: {
+            args: Prisma.AwardUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AwardPayload>
+          }
+          deleteMany: {
+            args: Prisma.AwardDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.AwardUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.AwardUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AwardPayload>[]
+          }
+          upsert: {
+            args: Prisma.AwardUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AwardPayload>
+          }
+          aggregate: {
+            args: Prisma.AwardAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateAward>
+          }
+          groupBy: {
+            args: Prisma.AwardGroupByArgs<ExtArgs>
+            result: $Utils.Optional<AwardGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.AwardCountArgs<ExtArgs>
+            result: $Utils.Optional<AwardCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -957,6 +1047,7 @@ export namespace Prisma {
     resume?: ResumeOmit
     workExperience?: WorkExperienceOmit
     education?: EducationOmit
+    award?: AwardOmit
   }
 
   /* Types for Logging */
@@ -1053,11 +1144,13 @@ export namespace Prisma {
   export type ResumeCountOutputType = {
     workExperiences: number
     educations: number
+    awards: number
   }
 
   export type ResumeCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     workExperiences?: boolean | ResumeCountOutputTypeCountWorkExperiencesArgs
     educations?: boolean | ResumeCountOutputTypeCountEducationsArgs
+    awards?: boolean | ResumeCountOutputTypeCountAwardsArgs
   }
 
   // Custom InputTypes
@@ -1083,6 +1176,13 @@ export namespace Prisma {
    */
   export type ResumeCountOutputTypeCountEducationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: EducationWhereInput
+  }
+
+  /**
+   * ResumeCountOutputType without action
+   */
+  export type ResumeCountOutputTypeCountAwardsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: AwardWhereInput
   }
 
 
@@ -1356,6 +1456,7 @@ export namespace Prisma {
     updatedAt?: boolean
     workExperiences?: boolean | Resume$workExperiencesArgs<ExtArgs>
     educations?: boolean | Resume$educationsArgs<ExtArgs>
+    awards?: boolean | Resume$awardsArgs<ExtArgs>
     _count?: boolean | ResumeCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["resume"]>
 
@@ -1426,6 +1527,7 @@ export namespace Prisma {
   export type ResumeInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     workExperiences?: boolean | Resume$workExperiencesArgs<ExtArgs>
     educations?: boolean | Resume$educationsArgs<ExtArgs>
+    awards?: boolean | Resume$awardsArgs<ExtArgs>
     _count?: boolean | ResumeCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type ResumeIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -1436,6 +1538,7 @@ export namespace Prisma {
     objects: {
       workExperiences: Prisma.$WorkExperiencePayload<ExtArgs>[]
       educations: Prisma.$EducationPayload<ExtArgs>[]
+      awards: Prisma.$AwardPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -1852,6 +1955,7 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     workExperiences<T extends Resume$workExperiencesArgs<ExtArgs> = {}>(args?: Subset<T, Resume$workExperiencesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$WorkExperiencePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     educations<T extends Resume$educationsArgs<ExtArgs> = {}>(args?: Subset<T, Resume$educationsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EducationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    awards<T extends Resume$awardsArgs<ExtArgs> = {}>(args?: Subset<T, Resume$awardsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AwardPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2332,6 +2436,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: EducationScalarFieldEnum | EducationScalarFieldEnum[]
+  }
+
+  /**
+   * Resume.awards
+   */
+  export type Resume$awardsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Award
+     */
+    select?: AwardSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Award
+     */
+    omit?: AwardOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AwardInclude<ExtArgs> | null
+    where?: AwardWhereInput
+    orderBy?: AwardOrderByWithRelationInput | AwardOrderByWithRelationInput[]
+    cursor?: AwardWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: AwardScalarFieldEnum | AwardScalarFieldEnum[]
   }
 
   /**
@@ -4574,6 +4702,1103 @@ export namespace Prisma {
 
 
   /**
+   * Model Award
+   */
+
+  export type AggregateAward = {
+    _count: AwardCountAggregateOutputType | null
+    _min: AwardMinAggregateOutputType | null
+    _max: AwardMaxAggregateOutputType | null
+  }
+
+  export type AwardMinAggregateOutputType = {
+    id: string | null
+    title: string | null
+    issuer: string | null
+    dateReceived: string | null
+    description: string | null
+    resumeId: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type AwardMaxAggregateOutputType = {
+    id: string | null
+    title: string | null
+    issuer: string | null
+    dateReceived: string | null
+    description: string | null
+    resumeId: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type AwardCountAggregateOutputType = {
+    id: number
+    title: number
+    issuer: number
+    dateReceived: number
+    description: number
+    resumeId: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type AwardMinAggregateInputType = {
+    id?: true
+    title?: true
+    issuer?: true
+    dateReceived?: true
+    description?: true
+    resumeId?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type AwardMaxAggregateInputType = {
+    id?: true
+    title?: true
+    issuer?: true
+    dateReceived?: true
+    description?: true
+    resumeId?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type AwardCountAggregateInputType = {
+    id?: true
+    title?: true
+    issuer?: true
+    dateReceived?: true
+    description?: true
+    resumeId?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type AwardAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Award to aggregate.
+     */
+    where?: AwardWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Awards to fetch.
+     */
+    orderBy?: AwardOrderByWithRelationInput | AwardOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: AwardWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Awards from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Awards.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Awards
+    **/
+    _count?: true | AwardCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: AwardMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: AwardMaxAggregateInputType
+  }
+
+  export type GetAwardAggregateType<T extends AwardAggregateArgs> = {
+        [P in keyof T & keyof AggregateAward]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateAward[P]>
+      : GetScalarType<T[P], AggregateAward[P]>
+  }
+
+
+
+
+  export type AwardGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: AwardWhereInput
+    orderBy?: AwardOrderByWithAggregationInput | AwardOrderByWithAggregationInput[]
+    by: AwardScalarFieldEnum[] | AwardScalarFieldEnum
+    having?: AwardScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: AwardCountAggregateInputType | true
+    _min?: AwardMinAggregateInputType
+    _max?: AwardMaxAggregateInputType
+  }
+
+  export type AwardGroupByOutputType = {
+    id: string
+    title: string
+    issuer: string
+    dateReceived: string | null
+    description: string | null
+    resumeId: string
+    createdAt: Date
+    updatedAt: Date
+    _count: AwardCountAggregateOutputType | null
+    _min: AwardMinAggregateOutputType | null
+    _max: AwardMaxAggregateOutputType | null
+  }
+
+  type GetAwardGroupByPayload<T extends AwardGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<AwardGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof AwardGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], AwardGroupByOutputType[P]>
+            : GetScalarType<T[P], AwardGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type AwardSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    title?: boolean
+    issuer?: boolean
+    dateReceived?: boolean
+    description?: boolean
+    resumeId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    resume?: boolean | ResumeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["award"]>
+
+  export type AwardSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    title?: boolean
+    issuer?: boolean
+    dateReceived?: boolean
+    description?: boolean
+    resumeId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    resume?: boolean | ResumeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["award"]>
+
+  export type AwardSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    title?: boolean
+    issuer?: boolean
+    dateReceived?: boolean
+    description?: boolean
+    resumeId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    resume?: boolean | ResumeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["award"]>
+
+  export type AwardSelectScalar = {
+    id?: boolean
+    title?: boolean
+    issuer?: boolean
+    dateReceived?: boolean
+    description?: boolean
+    resumeId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type AwardOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "issuer" | "dateReceived" | "description" | "resumeId" | "createdAt" | "updatedAt", ExtArgs["result"]["award"]>
+  export type AwardInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    resume?: boolean | ResumeDefaultArgs<ExtArgs>
+  }
+  export type AwardIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    resume?: boolean | ResumeDefaultArgs<ExtArgs>
+  }
+  export type AwardIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    resume?: boolean | ResumeDefaultArgs<ExtArgs>
+  }
+
+  export type $AwardPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Award"
+    objects: {
+      resume: Prisma.$ResumePayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      title: string
+      issuer: string
+      dateReceived: string | null
+      description: string | null
+      resumeId: string
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["award"]>
+    composites: {}
+  }
+
+  type AwardGetPayload<S extends boolean | null | undefined | AwardDefaultArgs> = $Result.GetResult<Prisma.$AwardPayload, S>
+
+  type AwardCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<AwardFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: AwardCountAggregateInputType | true
+    }
+
+  export interface AwardDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Award'], meta: { name: 'Award' } }
+    /**
+     * Find zero or one Award that matches the filter.
+     * @param {AwardFindUniqueArgs} args - Arguments to find a Award
+     * @example
+     * // Get one Award
+     * const award = await prisma.award.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends AwardFindUniqueArgs>(args: SelectSubset<T, AwardFindUniqueArgs<ExtArgs>>): Prisma__AwardClient<$Result.GetResult<Prisma.$AwardPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Award that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {AwardFindUniqueOrThrowArgs} args - Arguments to find a Award
+     * @example
+     * // Get one Award
+     * const award = await prisma.award.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends AwardFindUniqueOrThrowArgs>(args: SelectSubset<T, AwardFindUniqueOrThrowArgs<ExtArgs>>): Prisma__AwardClient<$Result.GetResult<Prisma.$AwardPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Award that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AwardFindFirstArgs} args - Arguments to find a Award
+     * @example
+     * // Get one Award
+     * const award = await prisma.award.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends AwardFindFirstArgs>(args?: SelectSubset<T, AwardFindFirstArgs<ExtArgs>>): Prisma__AwardClient<$Result.GetResult<Prisma.$AwardPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Award that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AwardFindFirstOrThrowArgs} args - Arguments to find a Award
+     * @example
+     * // Get one Award
+     * const award = await prisma.award.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends AwardFindFirstOrThrowArgs>(args?: SelectSubset<T, AwardFindFirstOrThrowArgs<ExtArgs>>): Prisma__AwardClient<$Result.GetResult<Prisma.$AwardPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Awards that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AwardFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Awards
+     * const awards = await prisma.award.findMany()
+     * 
+     * // Get first 10 Awards
+     * const awards = await prisma.award.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const awardWithIdOnly = await prisma.award.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends AwardFindManyArgs>(args?: SelectSubset<T, AwardFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AwardPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Award.
+     * @param {AwardCreateArgs} args - Arguments to create a Award.
+     * @example
+     * // Create one Award
+     * const Award = await prisma.award.create({
+     *   data: {
+     *     // ... data to create a Award
+     *   }
+     * })
+     * 
+     */
+    create<T extends AwardCreateArgs>(args: SelectSubset<T, AwardCreateArgs<ExtArgs>>): Prisma__AwardClient<$Result.GetResult<Prisma.$AwardPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Awards.
+     * @param {AwardCreateManyArgs} args - Arguments to create many Awards.
+     * @example
+     * // Create many Awards
+     * const award = await prisma.award.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends AwardCreateManyArgs>(args?: SelectSubset<T, AwardCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Awards and returns the data saved in the database.
+     * @param {AwardCreateManyAndReturnArgs} args - Arguments to create many Awards.
+     * @example
+     * // Create many Awards
+     * const award = await prisma.award.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Awards and only return the `id`
+     * const awardWithIdOnly = await prisma.award.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends AwardCreateManyAndReturnArgs>(args?: SelectSubset<T, AwardCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AwardPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Award.
+     * @param {AwardDeleteArgs} args - Arguments to delete one Award.
+     * @example
+     * // Delete one Award
+     * const Award = await prisma.award.delete({
+     *   where: {
+     *     // ... filter to delete one Award
+     *   }
+     * })
+     * 
+     */
+    delete<T extends AwardDeleteArgs>(args: SelectSubset<T, AwardDeleteArgs<ExtArgs>>): Prisma__AwardClient<$Result.GetResult<Prisma.$AwardPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Award.
+     * @param {AwardUpdateArgs} args - Arguments to update one Award.
+     * @example
+     * // Update one Award
+     * const award = await prisma.award.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends AwardUpdateArgs>(args: SelectSubset<T, AwardUpdateArgs<ExtArgs>>): Prisma__AwardClient<$Result.GetResult<Prisma.$AwardPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Awards.
+     * @param {AwardDeleteManyArgs} args - Arguments to filter Awards to delete.
+     * @example
+     * // Delete a few Awards
+     * const { count } = await prisma.award.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends AwardDeleteManyArgs>(args?: SelectSubset<T, AwardDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Awards.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AwardUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Awards
+     * const award = await prisma.award.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends AwardUpdateManyArgs>(args: SelectSubset<T, AwardUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Awards and returns the data updated in the database.
+     * @param {AwardUpdateManyAndReturnArgs} args - Arguments to update many Awards.
+     * @example
+     * // Update many Awards
+     * const award = await prisma.award.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Awards and only return the `id`
+     * const awardWithIdOnly = await prisma.award.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends AwardUpdateManyAndReturnArgs>(args: SelectSubset<T, AwardUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AwardPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Award.
+     * @param {AwardUpsertArgs} args - Arguments to update or create a Award.
+     * @example
+     * // Update or create a Award
+     * const award = await prisma.award.upsert({
+     *   create: {
+     *     // ... data to create a Award
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Award we want to update
+     *   }
+     * })
+     */
+    upsert<T extends AwardUpsertArgs>(args: SelectSubset<T, AwardUpsertArgs<ExtArgs>>): Prisma__AwardClient<$Result.GetResult<Prisma.$AwardPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Awards.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AwardCountArgs} args - Arguments to filter Awards to count.
+     * @example
+     * // Count the number of Awards
+     * const count = await prisma.award.count({
+     *   where: {
+     *     // ... the filter for the Awards we want to count
+     *   }
+     * })
+    **/
+    count<T extends AwardCountArgs>(
+      args?: Subset<T, AwardCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], AwardCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Award.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AwardAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends AwardAggregateArgs>(args: Subset<T, AwardAggregateArgs>): Prisma.PrismaPromise<GetAwardAggregateType<T>>
+
+    /**
+     * Group by Award.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AwardGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends AwardGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: AwardGroupByArgs['orderBy'] }
+        : { orderBy?: AwardGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, AwardGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetAwardGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Award model
+   */
+  readonly fields: AwardFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Award.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__AwardClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    resume<T extends ResumeDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ResumeDefaultArgs<ExtArgs>>): Prisma__ResumeClient<$Result.GetResult<Prisma.$ResumePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Award model
+   */
+  interface AwardFieldRefs {
+    readonly id: FieldRef<"Award", 'String'>
+    readonly title: FieldRef<"Award", 'String'>
+    readonly issuer: FieldRef<"Award", 'String'>
+    readonly dateReceived: FieldRef<"Award", 'String'>
+    readonly description: FieldRef<"Award", 'String'>
+    readonly resumeId: FieldRef<"Award", 'String'>
+    readonly createdAt: FieldRef<"Award", 'DateTime'>
+    readonly updatedAt: FieldRef<"Award", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Award findUnique
+   */
+  export type AwardFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Award
+     */
+    select?: AwardSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Award
+     */
+    omit?: AwardOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AwardInclude<ExtArgs> | null
+    /**
+     * Filter, which Award to fetch.
+     */
+    where: AwardWhereUniqueInput
+  }
+
+  /**
+   * Award findUniqueOrThrow
+   */
+  export type AwardFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Award
+     */
+    select?: AwardSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Award
+     */
+    omit?: AwardOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AwardInclude<ExtArgs> | null
+    /**
+     * Filter, which Award to fetch.
+     */
+    where: AwardWhereUniqueInput
+  }
+
+  /**
+   * Award findFirst
+   */
+  export type AwardFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Award
+     */
+    select?: AwardSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Award
+     */
+    omit?: AwardOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AwardInclude<ExtArgs> | null
+    /**
+     * Filter, which Award to fetch.
+     */
+    where?: AwardWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Awards to fetch.
+     */
+    orderBy?: AwardOrderByWithRelationInput | AwardOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Awards.
+     */
+    cursor?: AwardWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Awards from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Awards.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Awards.
+     */
+    distinct?: AwardScalarFieldEnum | AwardScalarFieldEnum[]
+  }
+
+  /**
+   * Award findFirstOrThrow
+   */
+  export type AwardFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Award
+     */
+    select?: AwardSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Award
+     */
+    omit?: AwardOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AwardInclude<ExtArgs> | null
+    /**
+     * Filter, which Award to fetch.
+     */
+    where?: AwardWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Awards to fetch.
+     */
+    orderBy?: AwardOrderByWithRelationInput | AwardOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Awards.
+     */
+    cursor?: AwardWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Awards from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Awards.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Awards.
+     */
+    distinct?: AwardScalarFieldEnum | AwardScalarFieldEnum[]
+  }
+
+  /**
+   * Award findMany
+   */
+  export type AwardFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Award
+     */
+    select?: AwardSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Award
+     */
+    omit?: AwardOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AwardInclude<ExtArgs> | null
+    /**
+     * Filter, which Awards to fetch.
+     */
+    where?: AwardWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Awards to fetch.
+     */
+    orderBy?: AwardOrderByWithRelationInput | AwardOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Awards.
+     */
+    cursor?: AwardWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Awards from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Awards.
+     */
+    skip?: number
+    distinct?: AwardScalarFieldEnum | AwardScalarFieldEnum[]
+  }
+
+  /**
+   * Award create
+   */
+  export type AwardCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Award
+     */
+    select?: AwardSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Award
+     */
+    omit?: AwardOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AwardInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Award.
+     */
+    data: XOR<AwardCreateInput, AwardUncheckedCreateInput>
+  }
+
+  /**
+   * Award createMany
+   */
+  export type AwardCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Awards.
+     */
+    data: AwardCreateManyInput | AwardCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Award createManyAndReturn
+   */
+  export type AwardCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Award
+     */
+    select?: AwardSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Award
+     */
+    omit?: AwardOmit<ExtArgs> | null
+    /**
+     * The data used to create many Awards.
+     */
+    data: AwardCreateManyInput | AwardCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AwardIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Award update
+   */
+  export type AwardUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Award
+     */
+    select?: AwardSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Award
+     */
+    omit?: AwardOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AwardInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Award.
+     */
+    data: XOR<AwardUpdateInput, AwardUncheckedUpdateInput>
+    /**
+     * Choose, which Award to update.
+     */
+    where: AwardWhereUniqueInput
+  }
+
+  /**
+   * Award updateMany
+   */
+  export type AwardUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Awards.
+     */
+    data: XOR<AwardUpdateManyMutationInput, AwardUncheckedUpdateManyInput>
+    /**
+     * Filter which Awards to update
+     */
+    where?: AwardWhereInput
+    /**
+     * Limit how many Awards to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Award updateManyAndReturn
+   */
+  export type AwardUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Award
+     */
+    select?: AwardSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Award
+     */
+    omit?: AwardOmit<ExtArgs> | null
+    /**
+     * The data used to update Awards.
+     */
+    data: XOR<AwardUpdateManyMutationInput, AwardUncheckedUpdateManyInput>
+    /**
+     * Filter which Awards to update
+     */
+    where?: AwardWhereInput
+    /**
+     * Limit how many Awards to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AwardIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Award upsert
+   */
+  export type AwardUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Award
+     */
+    select?: AwardSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Award
+     */
+    omit?: AwardOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AwardInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Award to update in case it exists.
+     */
+    where: AwardWhereUniqueInput
+    /**
+     * In case the Award found by the `where` argument doesn't exist, create a new Award with this data.
+     */
+    create: XOR<AwardCreateInput, AwardUncheckedCreateInput>
+    /**
+     * In case the Award was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<AwardUpdateInput, AwardUncheckedUpdateInput>
+  }
+
+  /**
+   * Award delete
+   */
+  export type AwardDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Award
+     */
+    select?: AwardSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Award
+     */
+    omit?: AwardOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AwardInclude<ExtArgs> | null
+    /**
+     * Filter which Award to delete.
+     */
+    where: AwardWhereUniqueInput
+  }
+
+  /**
+   * Award deleteMany
+   */
+  export type AwardDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Awards to delete
+     */
+    where?: AwardWhereInput
+    /**
+     * Limit how many Awards to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Award without action
+   */
+  export type AwardDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Award
+     */
+    select?: AwardSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Award
+     */
+    omit?: AwardOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AwardInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -4639,6 +5864,20 @@ export namespace Prisma {
   };
 
   export type EducationScalarFieldEnum = (typeof EducationScalarFieldEnum)[keyof typeof EducationScalarFieldEnum]
+
+
+  export const AwardScalarFieldEnum: {
+    id: 'id',
+    title: 'title',
+    issuer: 'issuer',
+    dateReceived: 'dateReceived',
+    description: 'description',
+    resumeId: 'resumeId',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type AwardScalarFieldEnum = (typeof AwardScalarFieldEnum)[keyof typeof AwardScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -4739,6 +5978,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"Resume"> | Date | string
     workExperiences?: WorkExperienceListRelationFilter
     educations?: EducationListRelationFilter
+    awards?: AwardListRelationFilter
   }
 
   export type ResumeOrderByWithRelationInput = {
@@ -4762,6 +6002,7 @@ export namespace Prisma {
     updatedAt?: SortOrder
     workExperiences?: WorkExperienceOrderByRelationAggregateInput
     educations?: EducationOrderByRelationAggregateInput
+    awards?: AwardOrderByRelationAggregateInput
   }
 
   export type ResumeWhereUniqueInput = Prisma.AtLeast<{
@@ -4788,6 +6029,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"Resume"> | Date | string
     workExperiences?: WorkExperienceListRelationFilter
     educations?: EducationListRelationFilter
+    awards?: AwardListRelationFilter
   }, "id">
 
   export type ResumeOrderByWithAggregationInput = {
@@ -4988,6 +6230,76 @@ export namespace Prisma {
     updatedAt?: DateTimeWithAggregatesFilter<"Education"> | Date | string
   }
 
+  export type AwardWhereInput = {
+    AND?: AwardWhereInput | AwardWhereInput[]
+    OR?: AwardWhereInput[]
+    NOT?: AwardWhereInput | AwardWhereInput[]
+    id?: StringFilter<"Award"> | string
+    title?: StringFilter<"Award"> | string
+    issuer?: StringFilter<"Award"> | string
+    dateReceived?: StringNullableFilter<"Award"> | string | null
+    description?: StringNullableFilter<"Award"> | string | null
+    resumeId?: StringFilter<"Award"> | string
+    createdAt?: DateTimeFilter<"Award"> | Date | string
+    updatedAt?: DateTimeFilter<"Award"> | Date | string
+    resume?: XOR<ResumeScalarRelationFilter, ResumeWhereInput>
+  }
+
+  export type AwardOrderByWithRelationInput = {
+    id?: SortOrder
+    title?: SortOrder
+    issuer?: SortOrder
+    dateReceived?: SortOrderInput | SortOrder
+    description?: SortOrderInput | SortOrder
+    resumeId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    resume?: ResumeOrderByWithRelationInput
+  }
+
+  export type AwardWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: AwardWhereInput | AwardWhereInput[]
+    OR?: AwardWhereInput[]
+    NOT?: AwardWhereInput | AwardWhereInput[]
+    title?: StringFilter<"Award"> | string
+    issuer?: StringFilter<"Award"> | string
+    dateReceived?: StringNullableFilter<"Award"> | string | null
+    description?: StringNullableFilter<"Award"> | string | null
+    resumeId?: StringFilter<"Award"> | string
+    createdAt?: DateTimeFilter<"Award"> | Date | string
+    updatedAt?: DateTimeFilter<"Award"> | Date | string
+    resume?: XOR<ResumeScalarRelationFilter, ResumeWhereInput>
+  }, "id">
+
+  export type AwardOrderByWithAggregationInput = {
+    id?: SortOrder
+    title?: SortOrder
+    issuer?: SortOrder
+    dateReceived?: SortOrderInput | SortOrder
+    description?: SortOrderInput | SortOrder
+    resumeId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: AwardCountOrderByAggregateInput
+    _max?: AwardMaxOrderByAggregateInput
+    _min?: AwardMinOrderByAggregateInput
+  }
+
+  export type AwardScalarWhereWithAggregatesInput = {
+    AND?: AwardScalarWhereWithAggregatesInput | AwardScalarWhereWithAggregatesInput[]
+    OR?: AwardScalarWhereWithAggregatesInput[]
+    NOT?: AwardScalarWhereWithAggregatesInput | AwardScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Award"> | string
+    title?: StringWithAggregatesFilter<"Award"> | string
+    issuer?: StringWithAggregatesFilter<"Award"> | string
+    dateReceived?: StringNullableWithAggregatesFilter<"Award"> | string | null
+    description?: StringNullableWithAggregatesFilter<"Award"> | string | null
+    resumeId?: StringWithAggregatesFilter<"Award"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"Award"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Award"> | Date | string
+  }
+
   export type ResumeCreateInput = {
     id?: string
     userId: string
@@ -5009,6 +6321,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     workExperiences?: WorkExperienceCreateNestedManyWithoutResumeInput
     educations?: EducationCreateNestedManyWithoutResumeInput
+    awards?: AwardCreateNestedManyWithoutResumeInput
   }
 
   export type ResumeUncheckedCreateInput = {
@@ -5032,6 +6345,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     workExperiences?: WorkExperienceUncheckedCreateNestedManyWithoutResumeInput
     educations?: EducationUncheckedCreateNestedManyWithoutResumeInput
+    awards?: AwardUncheckedCreateNestedManyWithoutResumeInput
   }
 
   export type ResumeUpdateInput = {
@@ -5055,6 +6369,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     workExperiences?: WorkExperienceUpdateManyWithoutResumeNestedInput
     educations?: EducationUpdateManyWithoutResumeNestedInput
+    awards?: AwardUpdateManyWithoutResumeNestedInput
   }
 
   export type ResumeUncheckedUpdateInput = {
@@ -5078,6 +6393,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     workExperiences?: WorkExperienceUncheckedUpdateManyWithoutResumeNestedInput
     educations?: EducationUncheckedUpdateManyWithoutResumeNestedInput
+    awards?: AwardUncheckedUpdateManyWithoutResumeNestedInput
   }
 
   export type ResumeCreateManyInput = {
@@ -5309,6 +6625,82 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type AwardCreateInput = {
+    id?: string
+    title: string
+    issuer: string
+    dateReceived?: string | null
+    description?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    resume: ResumeCreateNestedOneWithoutAwardsInput
+  }
+
+  export type AwardUncheckedCreateInput = {
+    id?: string
+    title: string
+    issuer: string
+    dateReceived?: string | null
+    description?: string | null
+    resumeId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type AwardUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    issuer?: StringFieldUpdateOperationsInput | string
+    dateReceived?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    resume?: ResumeUpdateOneRequiredWithoutAwardsNestedInput
+  }
+
+  export type AwardUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    issuer?: StringFieldUpdateOperationsInput | string
+    dateReceived?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    resumeId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AwardCreateManyInput = {
+    id?: string
+    title: string
+    issuer: string
+    dateReceived?: string | null
+    description?: string | null
+    resumeId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type AwardUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    issuer?: StringFieldUpdateOperationsInput | string
+    dateReceived?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AwardUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    issuer?: StringFieldUpdateOperationsInput | string
+    dateReceived?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    resumeId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type StringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -5370,6 +6762,12 @@ export namespace Prisma {
     none?: EducationWhereInput
   }
 
+  export type AwardListRelationFilter = {
+    every?: AwardWhereInput
+    some?: AwardWhereInput
+    none?: AwardWhereInput
+  }
+
   export type SortOrderInput = {
     sort: SortOrder
     nulls?: NullsOrder
@@ -5380,6 +6778,10 @@ export namespace Prisma {
   }
 
   export type EducationOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type AwardOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -5571,6 +6973,39 @@ export namespace Prisma {
     updatedAt?: SortOrder
   }
 
+  export type AwardCountOrderByAggregateInput = {
+    id?: SortOrder
+    title?: SortOrder
+    issuer?: SortOrder
+    dateReceived?: SortOrder
+    description?: SortOrder
+    resumeId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type AwardMaxOrderByAggregateInput = {
+    id?: SortOrder
+    title?: SortOrder
+    issuer?: SortOrder
+    dateReceived?: SortOrder
+    description?: SortOrder
+    resumeId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type AwardMinOrderByAggregateInput = {
+    id?: SortOrder
+    title?: SortOrder
+    issuer?: SortOrder
+    dateReceived?: SortOrder
+    description?: SortOrder
+    resumeId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
   export type ResumeCreateskillInput = {
     set: string[]
   }
@@ -5589,6 +7024,13 @@ export namespace Prisma {
     connect?: EducationWhereUniqueInput | EducationWhereUniqueInput[]
   }
 
+  export type AwardCreateNestedManyWithoutResumeInput = {
+    create?: XOR<AwardCreateWithoutResumeInput, AwardUncheckedCreateWithoutResumeInput> | AwardCreateWithoutResumeInput[] | AwardUncheckedCreateWithoutResumeInput[]
+    connectOrCreate?: AwardCreateOrConnectWithoutResumeInput | AwardCreateOrConnectWithoutResumeInput[]
+    createMany?: AwardCreateManyResumeInputEnvelope
+    connect?: AwardWhereUniqueInput | AwardWhereUniqueInput[]
+  }
+
   export type WorkExperienceUncheckedCreateNestedManyWithoutResumeInput = {
     create?: XOR<WorkExperienceCreateWithoutResumeInput, WorkExperienceUncheckedCreateWithoutResumeInput> | WorkExperienceCreateWithoutResumeInput[] | WorkExperienceUncheckedCreateWithoutResumeInput[]
     connectOrCreate?: WorkExperienceCreateOrConnectWithoutResumeInput | WorkExperienceCreateOrConnectWithoutResumeInput[]
@@ -5601,6 +7043,13 @@ export namespace Prisma {
     connectOrCreate?: EducationCreateOrConnectWithoutResumeInput | EducationCreateOrConnectWithoutResumeInput[]
     createMany?: EducationCreateManyResumeInputEnvelope
     connect?: EducationWhereUniqueInput | EducationWhereUniqueInput[]
+  }
+
+  export type AwardUncheckedCreateNestedManyWithoutResumeInput = {
+    create?: XOR<AwardCreateWithoutResumeInput, AwardUncheckedCreateWithoutResumeInput> | AwardCreateWithoutResumeInput[] | AwardUncheckedCreateWithoutResumeInput[]
+    connectOrCreate?: AwardCreateOrConnectWithoutResumeInput | AwardCreateOrConnectWithoutResumeInput[]
+    createMany?: AwardCreateManyResumeInputEnvelope
+    connect?: AwardWhereUniqueInput | AwardWhereUniqueInput[]
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -5648,6 +7097,20 @@ export namespace Prisma {
     deleteMany?: EducationScalarWhereInput | EducationScalarWhereInput[]
   }
 
+  export type AwardUpdateManyWithoutResumeNestedInput = {
+    create?: XOR<AwardCreateWithoutResumeInput, AwardUncheckedCreateWithoutResumeInput> | AwardCreateWithoutResumeInput[] | AwardUncheckedCreateWithoutResumeInput[]
+    connectOrCreate?: AwardCreateOrConnectWithoutResumeInput | AwardCreateOrConnectWithoutResumeInput[]
+    upsert?: AwardUpsertWithWhereUniqueWithoutResumeInput | AwardUpsertWithWhereUniqueWithoutResumeInput[]
+    createMany?: AwardCreateManyResumeInputEnvelope
+    set?: AwardWhereUniqueInput | AwardWhereUniqueInput[]
+    disconnect?: AwardWhereUniqueInput | AwardWhereUniqueInput[]
+    delete?: AwardWhereUniqueInput | AwardWhereUniqueInput[]
+    connect?: AwardWhereUniqueInput | AwardWhereUniqueInput[]
+    update?: AwardUpdateWithWhereUniqueWithoutResumeInput | AwardUpdateWithWhereUniqueWithoutResumeInput[]
+    updateMany?: AwardUpdateManyWithWhereWithoutResumeInput | AwardUpdateManyWithWhereWithoutResumeInput[]
+    deleteMany?: AwardScalarWhereInput | AwardScalarWhereInput[]
+  }
+
   export type WorkExperienceUncheckedUpdateManyWithoutResumeNestedInput = {
     create?: XOR<WorkExperienceCreateWithoutResumeInput, WorkExperienceUncheckedCreateWithoutResumeInput> | WorkExperienceCreateWithoutResumeInput[] | WorkExperienceUncheckedCreateWithoutResumeInput[]
     connectOrCreate?: WorkExperienceCreateOrConnectWithoutResumeInput | WorkExperienceCreateOrConnectWithoutResumeInput[]
@@ -5676,6 +7139,20 @@ export namespace Prisma {
     deleteMany?: EducationScalarWhereInput | EducationScalarWhereInput[]
   }
 
+  export type AwardUncheckedUpdateManyWithoutResumeNestedInput = {
+    create?: XOR<AwardCreateWithoutResumeInput, AwardUncheckedCreateWithoutResumeInput> | AwardCreateWithoutResumeInput[] | AwardUncheckedCreateWithoutResumeInput[]
+    connectOrCreate?: AwardCreateOrConnectWithoutResumeInput | AwardCreateOrConnectWithoutResumeInput[]
+    upsert?: AwardUpsertWithWhereUniqueWithoutResumeInput | AwardUpsertWithWhereUniqueWithoutResumeInput[]
+    createMany?: AwardCreateManyResumeInputEnvelope
+    set?: AwardWhereUniqueInput | AwardWhereUniqueInput[]
+    disconnect?: AwardWhereUniqueInput | AwardWhereUniqueInput[]
+    delete?: AwardWhereUniqueInput | AwardWhereUniqueInput[]
+    connect?: AwardWhereUniqueInput | AwardWhereUniqueInput[]
+    update?: AwardUpdateWithWhereUniqueWithoutResumeInput | AwardUpdateWithWhereUniqueWithoutResumeInput[]
+    updateMany?: AwardUpdateManyWithWhereWithoutResumeInput | AwardUpdateManyWithWhereWithoutResumeInput[]
+    deleteMany?: AwardScalarWhereInput | AwardScalarWhereInput[]
+  }
+
   export type ResumeCreateNestedOneWithoutWorkExperiencesInput = {
     create?: XOR<ResumeCreateWithoutWorkExperiencesInput, ResumeUncheckedCreateWithoutWorkExperiencesInput>
     connectOrCreate?: ResumeCreateOrConnectWithoutWorkExperiencesInput
@@ -5702,6 +7179,20 @@ export namespace Prisma {
     upsert?: ResumeUpsertWithoutEducationsInput
     connect?: ResumeWhereUniqueInput
     update?: XOR<XOR<ResumeUpdateToOneWithWhereWithoutEducationsInput, ResumeUpdateWithoutEducationsInput>, ResumeUncheckedUpdateWithoutEducationsInput>
+  }
+
+  export type ResumeCreateNestedOneWithoutAwardsInput = {
+    create?: XOR<ResumeCreateWithoutAwardsInput, ResumeUncheckedCreateWithoutAwardsInput>
+    connectOrCreate?: ResumeCreateOrConnectWithoutAwardsInput
+    connect?: ResumeWhereUniqueInput
+  }
+
+  export type ResumeUpdateOneRequiredWithoutAwardsNestedInput = {
+    create?: XOR<ResumeCreateWithoutAwardsInput, ResumeUncheckedCreateWithoutAwardsInput>
+    connectOrCreate?: ResumeCreateOrConnectWithoutAwardsInput
+    upsert?: ResumeUpsertWithoutAwardsInput
+    connect?: ResumeWhereUniqueInput
+    update?: XOR<XOR<ResumeUpdateToOneWithWhereWithoutAwardsInput, ResumeUpdateWithoutAwardsInput>, ResumeUncheckedUpdateWithoutAwardsInput>
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -5877,6 +7368,36 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type AwardCreateWithoutResumeInput = {
+    id?: string
+    title: string
+    issuer: string
+    dateReceived?: string | null
+    description?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type AwardUncheckedCreateWithoutResumeInput = {
+    id?: string
+    title: string
+    issuer: string
+    dateReceived?: string | null
+    description?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type AwardCreateOrConnectWithoutResumeInput = {
+    where: AwardWhereUniqueInput
+    create: XOR<AwardCreateWithoutResumeInput, AwardUncheckedCreateWithoutResumeInput>
+  }
+
+  export type AwardCreateManyResumeInputEnvelope = {
+    data: AwardCreateManyResumeInput | AwardCreateManyResumeInput[]
+    skipDuplicates?: boolean
+  }
+
   export type WorkExperienceUpsertWithWhereUniqueWithoutResumeInput = {
     where: WorkExperienceWhereUniqueInput
     update: XOR<WorkExperienceUpdateWithoutResumeInput, WorkExperienceUncheckedUpdateWithoutResumeInput>
@@ -5939,6 +7460,36 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"Education"> | Date | string
   }
 
+  export type AwardUpsertWithWhereUniqueWithoutResumeInput = {
+    where: AwardWhereUniqueInput
+    update: XOR<AwardUpdateWithoutResumeInput, AwardUncheckedUpdateWithoutResumeInput>
+    create: XOR<AwardCreateWithoutResumeInput, AwardUncheckedCreateWithoutResumeInput>
+  }
+
+  export type AwardUpdateWithWhereUniqueWithoutResumeInput = {
+    where: AwardWhereUniqueInput
+    data: XOR<AwardUpdateWithoutResumeInput, AwardUncheckedUpdateWithoutResumeInput>
+  }
+
+  export type AwardUpdateManyWithWhereWithoutResumeInput = {
+    where: AwardScalarWhereInput
+    data: XOR<AwardUpdateManyMutationInput, AwardUncheckedUpdateManyWithoutResumeInput>
+  }
+
+  export type AwardScalarWhereInput = {
+    AND?: AwardScalarWhereInput | AwardScalarWhereInput[]
+    OR?: AwardScalarWhereInput[]
+    NOT?: AwardScalarWhereInput | AwardScalarWhereInput[]
+    id?: StringFilter<"Award"> | string
+    title?: StringFilter<"Award"> | string
+    issuer?: StringFilter<"Award"> | string
+    dateReceived?: StringNullableFilter<"Award"> | string | null
+    description?: StringNullableFilter<"Award"> | string | null
+    resumeId?: StringFilter<"Award"> | string
+    createdAt?: DateTimeFilter<"Award"> | Date | string
+    updatedAt?: DateTimeFilter<"Award"> | Date | string
+  }
+
   export type ResumeCreateWithoutWorkExperiencesInput = {
     id?: string
     userId: string
@@ -5959,6 +7510,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     educations?: EducationCreateNestedManyWithoutResumeInput
+    awards?: AwardCreateNestedManyWithoutResumeInput
   }
 
   export type ResumeUncheckedCreateWithoutWorkExperiencesInput = {
@@ -5981,6 +7533,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     educations?: EducationUncheckedCreateNestedManyWithoutResumeInput
+    awards?: AwardUncheckedCreateNestedManyWithoutResumeInput
   }
 
   export type ResumeCreateOrConnectWithoutWorkExperiencesInput = {
@@ -6019,6 +7572,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     educations?: EducationUpdateManyWithoutResumeNestedInput
+    awards?: AwardUpdateManyWithoutResumeNestedInput
   }
 
   export type ResumeUncheckedUpdateWithoutWorkExperiencesInput = {
@@ -6041,6 +7595,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     educations?: EducationUncheckedUpdateManyWithoutResumeNestedInput
+    awards?: AwardUncheckedUpdateManyWithoutResumeNestedInput
   }
 
   export type ResumeCreateWithoutEducationsInput = {
@@ -6063,6 +7618,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     workExperiences?: WorkExperienceCreateNestedManyWithoutResumeInput
+    awards?: AwardCreateNestedManyWithoutResumeInput
   }
 
   export type ResumeUncheckedCreateWithoutEducationsInput = {
@@ -6085,6 +7641,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     workExperiences?: WorkExperienceUncheckedCreateNestedManyWithoutResumeInput
+    awards?: AwardUncheckedCreateNestedManyWithoutResumeInput
   }
 
   export type ResumeCreateOrConnectWithoutEducationsInput = {
@@ -6123,6 +7680,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     workExperiences?: WorkExperienceUpdateManyWithoutResumeNestedInput
+    awards?: AwardUpdateManyWithoutResumeNestedInput
   }
 
   export type ResumeUncheckedUpdateWithoutEducationsInput = {
@@ -6145,6 +7703,115 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     workExperiences?: WorkExperienceUncheckedUpdateManyWithoutResumeNestedInput
+    awards?: AwardUncheckedUpdateManyWithoutResumeNestedInput
+  }
+
+  export type ResumeCreateWithoutAwardsInput = {
+    id?: string
+    userId: string
+    title?: string | null
+    description?: string | null
+    photoUrl?: string | null
+    colorHex?: string
+    borderStyle?: string
+    summary?: string | null
+    firstName?: string | null
+    lastName?: string | null
+    jobTittle?: string | null
+    city?: string | null
+    country?: string | null
+    phone?: string | null
+    email?: string | null
+    skill?: ResumeCreateskillInput | string[]
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    workExperiences?: WorkExperienceCreateNestedManyWithoutResumeInput
+    educations?: EducationCreateNestedManyWithoutResumeInput
+  }
+
+  export type ResumeUncheckedCreateWithoutAwardsInput = {
+    id?: string
+    userId: string
+    title?: string | null
+    description?: string | null
+    photoUrl?: string | null
+    colorHex?: string
+    borderStyle?: string
+    summary?: string | null
+    firstName?: string | null
+    lastName?: string | null
+    jobTittle?: string | null
+    city?: string | null
+    country?: string | null
+    phone?: string | null
+    email?: string | null
+    skill?: ResumeCreateskillInput | string[]
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    workExperiences?: WorkExperienceUncheckedCreateNestedManyWithoutResumeInput
+    educations?: EducationUncheckedCreateNestedManyWithoutResumeInput
+  }
+
+  export type ResumeCreateOrConnectWithoutAwardsInput = {
+    where: ResumeWhereUniqueInput
+    create: XOR<ResumeCreateWithoutAwardsInput, ResumeUncheckedCreateWithoutAwardsInput>
+  }
+
+  export type ResumeUpsertWithoutAwardsInput = {
+    update: XOR<ResumeUpdateWithoutAwardsInput, ResumeUncheckedUpdateWithoutAwardsInput>
+    create: XOR<ResumeCreateWithoutAwardsInput, ResumeUncheckedCreateWithoutAwardsInput>
+    where?: ResumeWhereInput
+  }
+
+  export type ResumeUpdateToOneWithWhereWithoutAwardsInput = {
+    where?: ResumeWhereInput
+    data: XOR<ResumeUpdateWithoutAwardsInput, ResumeUncheckedUpdateWithoutAwardsInput>
+  }
+
+  export type ResumeUpdateWithoutAwardsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    title?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    photoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    colorHex?: StringFieldUpdateOperationsInput | string
+    borderStyle?: StringFieldUpdateOperationsInput | string
+    summary?: NullableStringFieldUpdateOperationsInput | string | null
+    firstName?: NullableStringFieldUpdateOperationsInput | string | null
+    lastName?: NullableStringFieldUpdateOperationsInput | string | null
+    jobTittle?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    skill?: ResumeUpdateskillInput | string[]
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    workExperiences?: WorkExperienceUpdateManyWithoutResumeNestedInput
+    educations?: EducationUpdateManyWithoutResumeNestedInput
+  }
+
+  export type ResumeUncheckedUpdateWithoutAwardsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    title?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    photoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    colorHex?: StringFieldUpdateOperationsInput | string
+    borderStyle?: StringFieldUpdateOperationsInput | string
+    summary?: NullableStringFieldUpdateOperationsInput | string | null
+    firstName?: NullableStringFieldUpdateOperationsInput | string | null
+    lastName?: NullableStringFieldUpdateOperationsInput | string | null
+    jobTittle?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    skill?: ResumeUpdateskillInput | string[]
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    workExperiences?: WorkExperienceUncheckedUpdateManyWithoutResumeNestedInput
+    educations?: EducationUncheckedUpdateManyWithoutResumeNestedInput
   }
 
   export type WorkExperienceCreateManyResumeInput = {
@@ -6165,6 +7832,16 @@ export namespace Prisma {
     startDate?: string | null
     endDate?: string | null
     description: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type AwardCreateManyResumeInput = {
+    id?: string
+    title: string
+    issuer: string
+    dateReceived?: string | null
+    description?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -6231,6 +7908,36 @@ export namespace Prisma {
     startDate?: NullableStringFieldUpdateOperationsInput | string | null
     endDate?: NullableStringFieldUpdateOperationsInput | string | null
     description?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AwardUpdateWithoutResumeInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    issuer?: StringFieldUpdateOperationsInput | string
+    dateReceived?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AwardUncheckedUpdateWithoutResumeInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    issuer?: StringFieldUpdateOperationsInput | string
+    dateReceived?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AwardUncheckedUpdateManyWithoutResumeInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    issuer?: StringFieldUpdateOperationsInput | string
+    dateReceived?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
