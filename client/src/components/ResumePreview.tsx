@@ -3,6 +3,7 @@ import { cn } from "@/lib/utils";
 import { ResumeValues } from "@/lib/validation";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
+import { formatDate } from "date-fns";
 
 interface ResumePreviewProps {
   resumeData: ResumeValues;
@@ -112,13 +113,24 @@ function WorkExperienceSection({ resumeData }: ResumeSectionProps) {
   return (
     <>
       <hr className="border-2" />
-      <div className="spacce-y-3">
+      <div className="space-y-3">
         <p className="text-2xl text-sky-900">Experience</p>
         {workExperiencesNotEmpty.map((exp, index) => (
           <div key={index} className="break-inside-avoid space-y-1">
             <div className="flex items-center justify-between text-xs">
-                <span className="text-base font-semibold">{exp.position}</span>
-                
+              <span className="text-base font-semibold">{exp.position}</span>
+              {exp.startDate && (
+                <span>
+                  {formatDate(exp.startDate, "MMM yyyy")} -{" "}
+                  {exp.endDate
+                    ? formatDate(exp.endDate, "MMM yyyy")
+                    : "Present"}
+                </span>
+              )}
+            </div>
+            <p className="text-xs font-semibold">{exp.company}</p>
+            <div className="whitespace-pre-line text-xs px-6">
+              {exp.description}
             </div>
           </div>
         ))}
