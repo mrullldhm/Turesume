@@ -107,7 +107,7 @@ function EducationItem({ form, index, remove }: EducationItemProps) {
           <FormItem>
             <FormLabel>Field of Study</FormLabel>
             <FormControl>
-              <Input {...field} placeholder="e.g., Business Administration" />
+              <Input {...field} placeholder="e.g., Bachelor of Science Mathematics" />
             </FormControl>
           </FormItem>
         )}
