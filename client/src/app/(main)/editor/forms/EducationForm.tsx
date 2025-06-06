@@ -100,6 +100,18 @@ function EducationItem({ form, index, remove }: EducationItemProps) {
         <span className="font-semibold">Education {index + 1}</span>
         <GripHorizontal className="size-5 cursor-grab text-muted-foreground" />
       </div>
+       <FormField
+        control={form.control}
+        name={`educations.${index}.fieldOfStudy`}
+        render={({ field }) => (
+          <FormItem>
+            <FormLabel>Field of Study</FormLabel>
+            <FormControl>
+              <Input {...field} placeholder="e.g., Business Administration" />
+            </FormControl>
+          </FormItem>
+        )}
+      />
       <FormField
         control={form.control}
         name={`educations.${index}.institution`}
@@ -108,18 +120,6 @@ function EducationItem({ form, index, remove }: EducationItemProps) {
             <FormLabel>Institution</FormLabel>
             <FormControl>
               <Input {...field} placeholder="e.g., University of XYZ" />
-            </FormControl>
-          </FormItem>
-        )}
-      />
-      <FormField
-        control={form.control}
-        name={`educations.${index}.fieldOfStudy`}
-        render={({ field }) => (
-          <FormItem>
-            <FormLabel>Field of Study</FormLabel>
-            <FormControl>
-              <Input {...field} placeholder="e.g., Business Administration" />
             </FormControl>
           </FormItem>
         )}
