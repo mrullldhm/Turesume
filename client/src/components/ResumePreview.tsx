@@ -38,6 +38,7 @@ export default function ResumePreview({
         <EducationSection resumeData={resumeData} />
         <AwardSection resumeData={resumeData} />
         <CertificateSection resumeData={resumeData} />
+        <ProjectSection resumeData={resumeData} />
       </div>
     </div>
   );
@@ -261,4 +262,42 @@ function CertificateSection({ resumeData }: ResumeSectionProps) {
     </>
   );
 }
+
+function ProjectSection({ resumeData }: ResumeSectionProps) {
+  const { projects } = resumeData;
+
+  const projectsNotEmpty = projects?.filter(
+    (project) => Object.values(project).filter(Boolean).length > 0,
+  );
+
+  if (!projectsNotEmpty?.length) return null;
+
+  return (
+    <>
+      <hr className="border-2" />
+      <div className="space-y-3">
+        <p className="text-2xl text-sky-900">Project</p>
+        {projectsNotEmpty.map((project, index) => (
+          <div key={index} className="break-inside-avoid space-y-1">
+            <div className="flex items-center justify-between text-xs">
+              <span className="text-base font-semibold">{project.title}</span>
+              <span>
+                {project.publicationDate && (
+                  <span>{formatDate(project.publicationDate, "MMM yyyy")}</span>
+                )}
+              </span>
+            </div>
+            {project.publicationUrl && (
+              <p className="text-xs">Publication URL {project.publicationUrl}</p>
+            )}
+            <div className="whitespace-pre-line text-xs px-6">
+              {project.description}
+            </div>
+          </div>
+        ))}
+      </div>
+    </>
+  );
+}
+
 
