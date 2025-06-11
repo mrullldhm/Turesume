@@ -37,7 +37,7 @@ export default function ResumePreview({
         <WorkExperienceSection resumeData={resumeData} />
         <EducationSection resumeData={resumeData} />
         <AwardSection resumeData={resumeData} />
-        {/* <CertificateSection resumeData={resumeData} /> */}
+        <CertificateSection resumeData={resumeData} />
       </div>
     </div>
   );
@@ -219,40 +219,46 @@ function AwardSection({ resumeData }: ResumeSectionProps) {
   );
 }
 
-// function EducationSection({ resumeData }: ResumeSectionProps) {
-//   const { educations } = resumeData;
+function CertificateSection({ resumeData }: ResumeSectionProps) {
+  const { certificates } = resumeData;
 
-//   const educationsNotEmpty = educations?.filter(
-//     (edu) => Object.values(edu).filter(Boolean).length > 0,
-//   );
+  const certificatesNotEmpty = certificates?.filter(
+    (cert) => Object.values(cert).filter(Boolean).length > 0,
+  );
 
-//   if (!educationsNotEmpty?.length) return null;
+  if (!certificatesNotEmpty?.length) return null;
 
-//   return (
-//     <>
-//       <hr className="border-2" />
-//       <div className="space-y-3">
-//         <p className="text-2xl text-sky-900">Education</p>
-//         {educationsNotEmpty.map((edu, index) => (
-//           <div key={index} className="break-inside-avoid space-y-1">
-//             <div className="flex items-center justify-between text-xs">
-//               <span className="text-base font-semibold">{edu.fieldOfStudy}</span>
-//               {edu.startDate && (
-//                 <span>
-//                   {formatDate(edu.startDate, "MMM yyyy")} -{" "}
-//                   {edu.endDate
-//                     ? formatDate(edu.endDate, "MMM yyyy")
-//                     : "Present"}
-//                 </span>
-//               )}
-//             </div>
-//             <p className="text-xs">{edu.institution}</p>
-//             <div className="whitespace-pre-line text-xs px-6">
-//               {edu.description}
-//             </div>
-//           </div>
-//         ))}
-//       </div>
-//     </>
-//   );
-// }
+  return (
+    <>
+      <hr className="border-2" />
+      <div className="space-y-3">
+        <p className="text-2xl text-sky-900">Certicate</p>
+        {certificatesNotEmpty.map((cert, index) => (
+          <div key={index} className="break-inside-avoid space-y-1">
+            <div className="flex items-center justify-between text-xs">
+              <span className="text-base font-semibold">{cert.title}</span>
+              <span>
+                {cert.issueDate && (
+                  <span>{formatDate(cert.issueDate, "MMM yyyy")}</span>
+                )}
+              </span>
+            </div>
+            {cert.issuer && (
+              <p className="text-xs">Issued by {cert.issuer}</p>
+            )}
+            {cert.credentialId && (
+              <p className="text-xs">Credential ID {cert.credentialId}</p>
+            )}
+            {cert.credentialUrl && (
+              <p className="text-xs">Credential URL {cert.credentialUrl}</p>
+            )}
+            <div className="whitespace-pre-line text-xs px-6">
+              {cert.description}
+            </div>
+          </div>
+        ))}
+      </div>
+    </>
+  );
+}
+
