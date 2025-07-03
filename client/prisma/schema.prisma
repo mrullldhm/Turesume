@@ -34,13 +34,13 @@ model Resume {
   phone String?
   email String?
 
-  // workExperiences WorkExperience[]
-  // educations Education[]
-  // awards Award[]
-  // certificates Certificate[]
-  // projects Project[]
+  workExperiences WorkExperience[]
+  educations Education[]
+  awards Award[]
+  certificates Certificate[]
+  projects Project[]
 
-  // skill String[]
+  skill String[]
   summary String?
 
   createdAt DateTime @default(now())
@@ -49,91 +49,91 @@ model Resume {
   @@map("resumes")
 }
 
-// model WorkExperience {
-//   id String @id @default (cuid())
+model WorkExperience {
+  id String @id @default (cuid())
 
-//   position String?
-//   company String?
-//   startDate String?
-//   endDate String?
-//   description String?
+  position String?
+  company String?
+  startDate String?
+  endDate String?
+  description String?
 
-//   resumeId String
-//   resume Resume @relation(fields: [resumeId], references: [id])
+  resumeId String
+  resume Resume @relation(fields: [resumeId], references: [id])
 
-//   createdAt DateTime @default(now())
-//   updatedAt DateTime @updatedAt
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
-//   @@map("work_experiences")
-// }
+  @@map("work_experiences")
+}
 
-// model Education {
-//   id String @id @default (cuid())
+model Education {
+  id String @id @default (cuid())
 
-//   institution String?
-//   fieldOfStudy String?
-//   startDate String?
-//   endDate String?
-//   description String?
+  institution String?
+  fieldOfStudy String?
+  startDate String?
+  endDate String?
+  description String?
 
-//   resumeId String
-//   resume Resume @relation(fields: [resumeId], references: [id])
+  resumeId String
+  resume Resume @relation(fields: [resumeId], references: [id])
   
-//   createdAt DateTime @default(now())
-//   updatedAt DateTime @updatedAt
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
-//   @@map("educations")
-// }
+  @@map("educations")
+}
 
-// model Award {
-//   id String @id @default(cuid())
+model Award {
+  id String @id @default(cuid())
 
-//   title String?
-//   issuer String?
-//   dateReceived String?
-//   description String?
+  title String?
+  issuer String?
+  dateReceived String?
+  description String?
 
-//   resumeId String
-//   resume Resume @relation(fields: [resumeId], references: [id])
+  resumeId String
+  resume Resume @relation(fields: [resumeId], references: [id])
 
-//   createdAt DateTime @default(now())
-//   updatedAt DateTime @updatedAt
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
-//   @@map("awards")
-// }
+  @@map("awards")
+}
 
-// model Certificate {
-//   id String @id @default(cuid())
+model Certificate {
+  id String @id @default(cuid())
 
-//   title String?
-//   issuer String?
-//   issueDate String?
-//   credentialId String?
-//   credentialUrl String?
-//   description String?
+  title String?
+  issuer String?
+  issueDate String?
+  credentialId String?
+  credentialUrl String?
+  description String?
 
-//   resumeId String
-//   resume Resume @relation(fields: [resumeId], references: [id])
+  resumeId String
+  resume Resume @relation(fields: [resumeId], references: [id])
 
-//   createdAt DateTime @default(now())
-//   updatedAt DateTime @updatedAt
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
-//   @@map("certificates")
-// }
+  @@map("certificates")
+}
 
-// model Project {
-//   id String @id @default(cuid())
+model Project {
+  id String @id @default(cuid())
 
-//   title String?
-//   publicationDate String?
-//   publicationUrl String?
-//   description String?
+  title String?
+  publicationDate String?
+  publicationUrl String?
+  description String?
 
-//   resumeId String
-//   resume Resume @relation(fields: [resumeId], references: [id])
+  resumeId String
+  resume Resume @relation(fields: [resumeId], references: [id])
 
-//   createdAt DateTime @default(now())
-//   updatedAt DateTime @updatedAt
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
-//   @@map("projects")
-// }
+  @@map("projects")
+}
