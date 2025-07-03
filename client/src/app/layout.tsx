@@ -5,37 +5,44 @@ import { ClerkProvider } from "@clerk/nextjs";
 import { ThemeProvider } from "next-themes";
 import { Toaster } from "sonner";
 
+// Load Poppins font with specific weights and subset
 const poppins = Poppins({
-  weight: ["400", "700"], // Specify weights
-  subsets: ["latin"],
+  weight: ["400", "700"], // Regular and Bold weights
+  subsets: ["latin"],     // Supports most Western languages
 });
 
+// Default metadata configuration for the application
 export const metadata: Metadata = {
   title: {
-    template: "Turesume - %s",
-    default: "Turesume",
+    template: "Turesume - %s",  // Dynamic title per page
+    default: "Turesume",        // Fallback title
   },
   description:
     "Turesume – AI Resume Builder. Create a professional, ATS-friendly resume in minutes with our free AI-powered tool. Get personalized suggestions, beat applicant tracking systems, and land more interviews with a resume tailored to your dream job.",
 };
 
+// Root layout shared across all pages
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
-    //
+    // Wrap entire app with ClerkProvider for authentication context
     <ClerkProvider>
       <html lang="en" suppressHydrationWarning>
         <body className={poppins.className}>
+          {/* Apply theming support (light/dark mode) using next-themes */}
           <ThemeProvider
-            attribute="class"
-            defaultTheme="system"
-            enableSystem
-            disableTransitionOnChange
+            attribute="class"               // Adds theme class to <html>
+            defaultTheme="system"           // Uses system preference by default
+            enableSystem                    // Enables system theme detection
+            disableTransitionOnChange       // Prevents flicker on theme switch
           >
+            {/* Render app pages/components */}
             {children}
+
+            {/* Global toast notifications using Sonner */}
             <Toaster />
           </ThemeProvider>
         </body>
