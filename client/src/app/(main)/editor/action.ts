@@ -69,17 +69,25 @@ export async function saveResume(values: ResumeValues) {
           deleteMany: {},
           create: workExperiences?.map((exp) => ({
             ...exp,
-            startDate: exp.startDate ? new Date(exp.startDate) : undefined,
-            endDate: exp.endDate ? new Date(exp.endDate) : undefined,
+            startDate: exp.startDate
+              ? new Date(exp.startDate).toISOString()
+              : undefined,
+            endDate: exp.endDate
+              ? new Date(exp.endDate).toISOString()
+              : undefined,
           })),
         },
 
-         educations: {
+        educations: {
           deleteMany: {},
           create: educations?.map((edu) => ({
             ...edu,
-            startDate: edu.startDate ? new Date(edu.startDate) : undefined,
-            endDate: edu.endDate ? new Date(edu.endDate) : undefined,
+            startDate: edu.startDate
+              ? new Date(edu.startDate).toISOString()
+              : undefined,
+            endDate: edu.endDate
+              ? new Date(edu.endDate).toISOString()
+              : undefined,
           })),
         },
 
@@ -88,7 +96,7 @@ export async function saveResume(values: ResumeValues) {
           create: awards?.map((award) => ({
             ...award,
             dateReceived: award.dateReceived
-              ? new Date(award.dateReceived)
+              ? new Date(award.dateReceived).toISOString()
               : undefined,
           })),
         },
@@ -97,7 +105,9 @@ export async function saveResume(values: ResumeValues) {
           deleteMany: {},
           create: certificates?.map((cert) => ({
             ...cert,
-            issueDate: cert.issueDate ? new Date(cert.issueDate) : undefined,
+            issueDate: cert.issueDate
+              ? new Date(cert.issueDate).toISOString()
+              : undefined,
           })),
         },
 
@@ -106,7 +116,7 @@ export async function saveResume(values: ResumeValues) {
           create: projects?.map((project) => ({
             ...project,
             publicationDate: project.publicationDate
-              ? new Date(project.publicationDate)
+              ? new Date(project.publicationDate).toISOString()
               : undefined,
           })),
         },
@@ -123,16 +133,24 @@ export async function saveResume(values: ResumeValues) {
         workExperiences: {
           create: workExperiences?.map((exp) => ({
             ...exp,
-            startDate: exp.startDate ? new Date(exp.startDate) : undefined,
-            endDate: exp.endDate ? new Date(exp.endDate) : undefined,
+            startDate: exp.startDate
+              ? new Date(exp.startDate).toISOString()
+              : undefined,
+            endDate: exp.endDate
+              ? new Date(exp.endDate).toISOString()
+              : undefined,
           })),
         },
 
         educations: {
           create: educations?.map((edu) => ({
             ...edu,
-            startDate: edu.startDate ? new Date(edu.startDate) : undefined,
-            endDate: edu.endDate ? new Date(edu.endDate) : undefined,
+            startDate: edu.startDate
+              ? new Date(edu.startDate).toISOString()
+              : undefined,
+            endDate: edu.endDate
+              ? new Date(edu.endDate).toISOString()
+              : undefined,
           })),
         },
 
@@ -140,7 +158,7 @@ export async function saveResume(values: ResumeValues) {
           create: awards?.map((award) => ({
             ...award,
             dateReceived: award.dateReceived
-              ? new Date(award.dateReceived)
+              ? new Date(award.dateReceived).toISOString()
               : undefined,
           })),
         },
@@ -148,7 +166,9 @@ export async function saveResume(values: ResumeValues) {
         certificates: {
           create: certificates?.map((cert) => ({
             ...cert,
-            issueDate: cert.issueDate ? new Date(cert.issueDate) : undefined,
+            issueDate: cert.issueDate
+              ? new Date(cert.issueDate).toISOString()
+              : undefined,
           })),
         },
 
@@ -156,7 +176,7 @@ export async function saveResume(values: ResumeValues) {
           create: projects?.map((project) => ({
             ...project,
             publicationDate: project.publicationDate
-              ? new Date(project.publicationDate)
+              ? new Date(project.publicationDate).toISOString()
               : undefined,
           })),
         },
