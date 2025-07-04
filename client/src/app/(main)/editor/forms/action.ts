@@ -1,7 +1,13 @@
 "use server";
 
 import openai from "@/lib/openai";
-import { GenerateSummaryInput, generateSummaryScheme } from "@/lib/validation";
+import {
+  GenerateSummaryInput,
+  generateSummarySchema,
+  GenerateWorkExperienceInput,
+  generateWorkExperienceSchema,
+  WorkExperience,
+} from "@/lib/validation";
 
 export async function generateSummary(input: GenerateSummaryInput) {
   // TODO: Block for non-premium users
@@ -14,7 +20,7 @@ export async function generateSummary(input: GenerateSummaryInput) {
     certificates,
     projects,
     skills,
-  } = generateSummaryScheme.parse(input);
+  } = generateSummarySchema.parse(input);
 
   const systemMessage = `
 You are an expert resume writer AI helping users craft their own resume summaries.
@@ -117,4 +123,63 @@ ${skills || "None"}
   }
 
   return aiResponse;
+}
+
+export async function generateWorkExperience(
+  input: GenerateWorkExperienceInput,
+) {
+  // TODO: Block for non-premium users
+
+  const { description } = generateWorkExperienceSchema.parse(input);
+
+  const systemMessage = `
+You are a helpful assistant that generates **one** structured work experience entry for a resume, based strictly on the user's description.
+
+Respond ONLY with the following fields in **this exact format**:
+
+Job title: <job title>
+Company: <company name>
+Start date: <YYYY-MM-DD> (if available)
+End date: <YYYY-MM-DD> (if available)
+Description:
+- <bullet point 1>
+- <bullet point 2>
+- <etc.>
+
+⚠️ IMPORTANT:
+- Do NOT make up dates or company names unless clearly provided.
+- Description must be **concise, action-oriented bullet points**, relevant to the job title.
+- Use professional language suitable for a modern resume.
+- Do not add extra commentary or text outside of the format.
+`;
+
+  const userMessage = `
+Based on the following notes, generate one work experience entry:
+
+"${description}"
+`;
+
+  const completion = await openai.chat.completions.create({
+    model: "gpt-4.1-nano",
+    messages: [
+      { role: "system", content: systemMessage },
+      { role: "user", content: userMessage },
+    ],
+  });
+
+  const aiResponse = completion.choices[0].message.content;
+
+  if (!aiResponse) {
+    throw new Error("Failed to generate summary");
+  }
+
+  console.log("aiResponse", aiResponse);
+
+  return {
+    position: aiResponse.match(/Job title: (.*)/)?.[1] || "",
+    company: aiResponse.match(/Company: (.*)/)?.[1] || "",
+    description: (aiResponse.match(/Description:([\s\S]*)/)?.[1] || "").trim(),
+    startDate: aiResponse.match(/Start date: (\d{4}-\d{2}-\d{2})/)?.[1],
+    endDate: aiResponse.match(/End date: (\d{4}-\d{2}-\d{2})/)?.[1],
+  } satisfies WorkExperience;
 }

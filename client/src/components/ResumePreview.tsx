@@ -34,6 +34,10 @@ export default function ResumePreview({
           zoom: (1 / 794) * width,
         }}
       >
+          {/* DEBUG: View JSON resumeData
+    <p className="text-xs bg-gray-100 p-4 overflow-auto max-h-64">
+      {JSON.stringify(resumeData, null, 2)}
+    </p> */}
         <PersonalInfoHeader resumeData={resumeData} />
         <SummarySection resumeData={resumeData} />
         <SkillSection resumeData={resumeData} />
