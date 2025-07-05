@@ -1,30 +1,60 @@
-import { Metadata } from "next"; // Type for setting page-level metadata in Next.js
-import { Button } from "@/components/ui/button"; // Reusable Button component from shadcn/ui
-import { PlusSquare } from "lucide-react"; // Icon for visual indication (plus inside square)
-import Link from "next/link"; // Client-side navigation for improved performance
+import { Metadata } from "next";
+import { Button } from "@/components/ui/button";
+import { PlusSquare } from "lucide-react";
+import Link from "next/link";
+import { auth } from "@clerk/nextjs/server";
+import prisma from "@/lib/prisma";
+import { resumeDataInclude } from "@/lib/types";
+import ResumeItem from "./ResumeItem";
 
-// Define SEO metadata for this page
 export const metadata: Metadata = {
-  title: "Resumes",                         // Appears in the browser tab
-  description: "Manage your resumes",       // Helps with search engine indexing
+  title: "Resumes",
+  description: "Manage your resumes",
 };
 
-// Resumes Page – allows users to view or create resumes
-export default function Page() {
+export default async function Page() {
+  const { userId } = await auth();
+  if (!userId) {
+    return null;
+  }
+
+  const [resumes, totalCount] = await Promise.all([
+    prisma.resume.findMany({
+      where: {
+        userId,
+      },
+      orderBy: {
+        createdAt: "desc",
+      },
+      include: resumeDataInclude,
+    }),
+
+    prisma.resume.count({
+      where: {
+        userId,
+      },
+    }),
+  ]);
+
+  // TODO: Check quota for non-premium users
+
   return (
-    // Responsive, centered container with consistent spacing
     <main className="mx-auto w-full max-w-7xl space-y-6 px-3 py-6">
-      
-      {/* "Create Resume" button – navigates to the editor page */}
-      <Button 
-        asChild                               // Render as child element (Link)
-        className="mx-auto flex w-fit gap-2" // Center horizontally, allow icon/text spacing
-      >
+      <Button asChild className="mx-auto flex w-fit gap-2">
         <Link href="/editor">
-          <PlusSquare className="size-5" />  {/* Icon indicating 'add new' */}
-          Create Resume                      {/* Button label */}
+          <PlusSquare className="size-5" />
+          Create Resume
         </Link>
       </Button>
+      <div className="space-y-1">
+        <h1 className="text-3xl font-bold">Your resumes</h1>
+        <p>Total: {totalCount}</p>
+      </div>
+      <div className="flex flex-col sm:grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 w-full gap-3">
+        {resumes.map((resume) => (
+          <ResumeItem key={resume.id} resume={resume} />
+        ))}
+      </div>
     </main>
   );
 }
