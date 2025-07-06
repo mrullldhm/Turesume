@@ -13,7 +13,7 @@ interface ResumeItemProps {
 export default function ResumeItem({ resume }: ResumeItemProps) {
   const wasUpdated = resume.updatedAt !== resume.createdAt;
   return (
-    <div className="group rounded-lg shadow-lg hover:bg-primary-foreground transition-all p-3">
+    <div className="group rounded-lg shadow-lg hover:bg-primary-foreground transition-all p-3 border">
       <div className="space-y-3">
         <Link
           href={`/editor?resumeId=${resume.id}`}
@@ -32,7 +32,7 @@ export default function ResumeItem({ resume }: ResumeItemProps) {
         </Link>
         <Link
           href={`/editor?resumeId=${resume.id}`}
-          className="relative inline-block w-full"
+          className="relative inline-block w-full "
         >
           <ResumePreview
             resumeData={mapToResumeValues(resume)}
