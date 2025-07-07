@@ -1,10 +1,9 @@
 import { Metadata } from "next";
-import { Button } from "@/components/ui/button";
-import Link from "next/link";
 import { auth } from "@clerk/nextjs/server";
 import prisma from "@/lib/prisma";
 import { resumeDataInclude } from "@/lib/types";
 import ResumeItem from "./ResumeItem";
+import CreateResumeButton from "./CreateResumeButton";
 
 export const metadata: Metadata = {
   title: "Resumes",
@@ -39,11 +38,7 @@ export default async function Page() {
 
   return (
     <main className="mx-auto w-full max-w-7xl space-y-6 px-3 py-6">
-      <Button asChild className="mx-auto flex w-fit gap-2">
-        <Link href="/editor">
-          Create Resume
-        </Link>
-      </Button>
+      <CreateResumeButton canCreate={totalCount < 3} />
       <div className="space-y-1">
         <h1 className="text-3xl font-bold">Your resumes</h1>
         <p>Total: {totalCount}</p>
