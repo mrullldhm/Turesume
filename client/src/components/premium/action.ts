@@ -1,5 +1,6 @@
 "use server";
 
+import { env } from "@/env";
 import stripe from "@/lib/stripe";
 import { currentUser } from "@clerk/nextjs/server";
 
@@ -23,7 +24,7 @@ export async function createCheckoutSession(priceId: string) {
     },
     custom_text: {
         terms_of_service_acceptance: {
-            message: `I have read [terms of service](${process.env.NEXT_PUBLIC_BASE_URL}/tos) and agree to them`,
+            message: `I have read [terms of service](${env.NEXT_PUBLIC_BASE_URL}/tos) and agree to them`,
         }
     },
     consent_collection: {
