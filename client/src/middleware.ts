@@ -3,9 +3,10 @@ import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
 // Define public (unauthenticated) routes using a regular expression matcher
 // These routes will NOT require users to be signed in
 const isPublicRoute = createRouteMatcher([
-  "/",                // Homepage
-  "/sign-in(.*)",     // Sign-in page and any nested routes
-  "/sign-up(.*)",     // Sign-up page and any nested routes
+  "/", // Homepage
+  "/sign-in(.*)", // Sign-in page and any nested routes
+  "/sign-up(.*)", // Sign-up page and any nested routes
+  "/api/stripe-webhook", // Stripe webhook endpoint
 ]);
 
 // Middleware handler to protect routes by default, except public ones

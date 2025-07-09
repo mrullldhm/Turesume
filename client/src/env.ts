@@ -24,6 +24,8 @@ export const env = createEnv({
 
     // Stripe secret key (server-side, sensitive)
     STRIPE_SECRET_KEY: z.string().min(1, "STRIPE_SECRET_KEY is required"),
+    // Stripe webhook secret (server-side, sensitive)
+    STRIPE_WEBHOOK_SECRET: z.string().min(1, "STRIPE_WEBHOOK_SECRET is required"),
   },
   client: {
     // Clerk publishable key (client-side, safe to expose)
@@ -76,6 +78,7 @@ export const env = createEnv({
     BLOB_READ_WRITE_TOKEN: process.env.BLOB_READ_WRITE_TOKEN,
     OPENAI_API_KEY: process.env.OPENAI_API_KEY,
     STRIPE_SECRET_KEY: process.env.STRIPE_SECRET_KEY,
+    STRIPE_WEBHOOK_SECRET: process.env.STRIPE_WEBHOOK_SECRET,
 
     // Client-side variables
     NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY:
