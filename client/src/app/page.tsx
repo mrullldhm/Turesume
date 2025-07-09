@@ -1,13 +1,20 @@
 import logo from "@/assets/logo.png";
-import resumePreview from "@/assets/resume-preview.jpg";
+import resumePreview from "@/assets/resume-preview.png";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import Link from "next/link";
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center gap-6 bg-gray-100 px-5 py-12 text-center text-gray-900 md:flex-row md:text-start lg:gap-12">
-      <div className="max-w-prose space-y-3">
+    <main
+      className="flex min-h-screen flex-col items-center justify-center gap-6 bg-gray-100 px-5 py-12 text-center text-gray-900 md:flex-row md:text-start lg:gap-12"
+      style={{
+        backgroundImage: `url(${resumePreview.src})`,
+        backgroundSize: "contain",
+        backgroundRepeat: "no-repeat",
+      }}
+    >
+      <div className="max-w-prose space-y-3  p-6 md:p-8">
         <Image
           src={logo}
           alt="Logo"
@@ -24,19 +31,11 @@ export default function Home() {
         </h1>
         <p className="text-lg text-gray-500">
           Our <span className="font-bold">AI resume builder</span> helps you
-          design a professional resume, even if you&apos;re not very smart.
+          design a professional resume, even if youre not very smart
         </p>
         <Button asChild size="lg" variant="premium">
           <Link href="/resumes">Get started</Link>
         </Button>
-      </div>
-      <div>
-        <Image
-          src={resumePreview}
-          alt="Resume preview"
-          width={600}
-          className="shadow-md lg:rotate-[1.5deg]"
-        />
       </div>
     </main>
   );
