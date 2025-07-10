@@ -1,7 +1,7 @@
-# TuResume
+# Moresume
 
 ## About
-TuResume is an easy-to-use resume builder that helps you create professional resumes quickly. Built with PostgreSQL, Express, React, and Node.js (PERN stack) using TypeScript, it includes smart AI features and a mobile-friendly design.
+Moresume is an easy-to-use resume builder that helps you create professional resumes quickly. Built with PostgreSQL, Express, React, and Node.js (PERN stack) using TypeScript, it includes smart AI features and a mobile-friendly design.
 
 ## Features
 - **Step-by-Step Form**: Create resumes with a simple, guided form using `react-hook-form`.
@@ -17,12 +17,12 @@ TuResume is an easy-to-use resume builder that helps you create professional res
 - **Login System**: Secure accounts with Clerk (`@clerk/nextjs`, `@clerk/themes`).
 
 ## Setup
-To run TuResume on your computer:
+To run Moresume on your computer:
 
 ```bash
 # Get the code
-git clone https://github.com/mrullldhm/Turesume.git
-cd Turesume
+git clone https://github.com/mrullldhm/Moresume.git
+cd Moresume
 
 # Install frontend tools
 cd client
@@ -65,7 +65,7 @@ Add these to `.env` files in `server/` and `client/` folders:
 
 ```bash
 # Server .env
-DATABASE_URL=postgresql://user:password@localhost:5432/turesume
+DATABASE_URL=postgresql://user:password@localhost:5432/Moresume
 PORT=5000
 CLERK_SECRET_KEY=your_clerk_secret_key
 OPENAI_API_KEY=your_openai_api_key
@@ -98,6 +98,6 @@ This project uses the MIT License. Check the [LICENSE](LICENSE) file for details
 
 ## Contact
 For help or feedback:
-- GitHub Issues: [https://github.com/mrullldhm/Turesume/issues](https://github.com/mrullldhm/Turesume/issues)
+- GitHub Issues: [https://github.com/mrullldhm/Moresume/issues](https://github.com/mrullldhm/Moresume/issues)
 - Twitter: [https://x.com/mrullldhm](https://x.com/mrullldhm)
 - LinkedIn: [https://www.linkedin.com/in/mrullldhm/](https://www.linkedin.com/in/mrullldhm/)
