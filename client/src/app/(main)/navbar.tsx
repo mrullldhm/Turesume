@@ -20,18 +20,18 @@ export default function Navbar() {
   }, []);
 
   return (
-    <header className="shadow-sm">
-      <div className="max-w-7xl mx-auto p-2 flex items-center justify-between gap-3">
+    <header className="">
+      <div className=" mx-auto px-10 flex items-center justify-between gap-3">
         {/* LINK TO HOME PAGE */}
         <Link href="/resumes" className="flex items-center">
           <Image
             src={logo}
             alt="logo"
-            width={55}
+            width={75}
             className="rounded-full"
           />
-          <span className="text-xl font-bold tracking-tight">
-            TURESUME
+          <span className="text-2xl font-extrabold tracking-widest">
+            ORESUME
           </span>
         </Link>
 

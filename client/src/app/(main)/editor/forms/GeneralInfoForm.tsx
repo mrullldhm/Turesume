@@ -59,7 +59,7 @@ export default function GeneralInfoForm({
                 <FormControl>
                   <Input
                     {...field}
-                    placeholder="e.g., Marketing Manager Resume"
+                    placeholder="e.g., Full-Stack Web Developer Resume"
                     autoFocus
                   />
                 </FormControl>
@@ -76,7 +76,7 @@ export default function GeneralInfoForm({
                 <FormControl>
                   <Input
                     {...field}
-                    placeholder="e.g., Resume for a managerial position in the retail industry"
+                    placeholder="e.g., Position in company XYZ"
                   />
                 </FormControl>
                 <FormMessage />

@@ -14,11 +14,11 @@ const inter = Inter({
 // Default metadata configuration for the application
 export const metadata: Metadata = {
   title: {
-    template: "Turesume - %s", // Dynamic title per page
-    default: "Turesume", // Fallback title
+    template: "Moresume - %s", // Dynamic title per page
+    default: "Moresume", // Fallback title
   },
   description:
-    "Turesume – AI Resume Builder. Create a professional, ATS-friendly resume in minutes with our free AI-powered tool. Get personalized suggestions, beat applicant tracking systems, and land more interviews with a resume tailored to your dream job.",
+    "Moresume – AI Resume Builder. Create a professional, ATS-friendly resume in minutes with our free AI-powered tool. Get personalized suggestions, beat applicant tracking systems, and land more interviews with a resume tailored to your dream job.",
 };
 
 // Root layout shared across all pages

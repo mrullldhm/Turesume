@@ -7,7 +7,7 @@ export default function GetSubscriptionButton() {
   const premiumModal = usePremiumModal();
 
   return (
-    <Button onClick={() => premiumModal.setOpen(true)} variant="premium">
+    <Button onClick={() => premiumModal.setOpen(true)} variant="default">
       Get Premium subscription
     </Button>
   );

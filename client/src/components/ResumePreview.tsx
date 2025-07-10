@@ -9,7 +9,7 @@ import { BorderStyles } from "@/app/(main)/editor/BorderStyleButton";
 
 interface ResumePreviewProps {
   resumeData: ResumeValues;
-  contentRef?: React.Ref<HTMLDivElement>
+  contentRef?: React.Ref<HTMLDivElement>;
   className?: string;
 }
 
@@ -38,7 +38,7 @@ export default function ResumePreview({
         ref={contentRef}
         id="resumePreviewContent"
       >
-          {/* DEBUG: View JSON resumeData
+        {/* DEBUG: View JSON resumeData
     <p className="text-xs bg-gray-100 p-4 overflow-auto max-h-64">
       {JSON.stringify(resumeData, null, 2)}
     </p> */}
@@ -106,13 +106,16 @@ function PersonalInfoHeader({ resumeData }: ResumeSectionProps) {
           <p className="text-3xl text-sky-900" style={{ color: colorHex }}>
             {firstName} {lastName}
           </p>
-          <p className="text-s">{jobTitle}</p>
+
+          <div className="text-xs text-center">
+            <p className="font-bold">{jobTitle}</p>
+            <p>
+              {[city, country].filter(Boolean).join(", ")}
+              {(city || country) && (phone || email) ? " | " : ""}
+              {[phone, email].filter(Boolean).join(" | ")}
+            </p>
+          </div>
         </div>
-        <p className="text-xs text-center">
-          {[city, country].filter(Boolean).join(", ")}
-          {(city || country) && (phone || email) ? " | " : ""}
-          {[phone, email].filter(Boolean).join(" | ")}
-        </p>
       </div>
     </div>
   );
