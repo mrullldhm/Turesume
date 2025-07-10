@@ -31,7 +31,7 @@ export default function Navbar() {
             className="rounded-full"
           />
           <span className="text-2xl font-extrabold tracking-widest">
-            ORESUME
+            RESUME
           </span>
         </Link>
 

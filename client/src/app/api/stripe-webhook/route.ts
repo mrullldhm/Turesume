@@ -8,10 +8,10 @@ import Stripe from "stripe";
 export async function POST(req: NextRequest) {
   try {
     const payload = await req.text();
-    const signature = req.headers.get("Stripe-Signature");
+    const signature = req.headers.get("stripe-signature");
 
     if (!signature) {
-      return new Response("Missing Stripe Signature", { status: 400 });
+      return new Response("Signature is missing", { status: 400 });
     }
 
     const event = stripe.webhooks.constructEvent(
@@ -20,7 +20,7 @@ export async function POST(req: NextRequest) {
       env.STRIPE_WEBHOOK_SECRET,
     );
 
-    console.log(`Received Stripe event: ${event.type}`, event.data.object);
+    console.log(`Received event: ${event.type}`, event.data.object);
 
     switch (event.type) {
       case "checkout.session.completed":
@@ -28,20 +28,20 @@ export async function POST(req: NextRequest) {
         break;
       case "customer.subscription.created":
       case "customer.subscription.updated":
-        await handleSubscriptionCreatedOrUpdated(event.data.object.id);
+        await handleSubscriptionCreatedOrUpdated(event.data.object);
         break;
       case "customer.subscription.deleted":
         await handleSubscriptionDeleted(event.data.object);
         break;
       default:
-        console.log(`Unhandled Stripe event type: ${event.type}`);
+        console.log(`Unhandled event type: ${event.type}`);
         break;
     }
 
     return new Response("Event received", { status: 200 });
   } catch (error) {
     console.error(error);
-    return new Response("Error", { status: 500 });
+    return new Response("Internal server error", { status: 500 });
   }
 }
 
@@ -49,7 +49,7 @@ async function handleSessionCompleted(session: Stripe.Checkout.Session) {
   const userId = session.metadata?.userId;
 
   if (!userId) {
-    throw new Error("User ID not found in session metadata");
+    throw new Error("User ID is missing in session metadata");
   }
 
   (await clerkClient()).users.updateUserMetadata(userId, {
@@ -57,10 +57,44 @@ async function handleSessionCompleted(session: Stripe.Checkout.Session) {
       stripeCustomerId: session.customer as string,
     },
   });
+
+  console.log("handleSessionCompleted", session);
 }
 
-async function handleSubscriptionCreatedOrUpdated(subscriptionId: string) {
-  const subscription = await stripe.subscriptions.retrieve(subscriptionId);
+async function handleSubscriptionCreatedOrUpdated(subscription: Stripe.Subscription) {
+  const userId = subscription.metadata?.userId;
+  if (!userId) {
+    throw new Error("User ID is missing in subscription metadata");
+  }
+
+  // Get the first subscription item's price to determine interval and interval_count
+  const subscriptionItem = subscription.items.data[0];
+  if (!subscriptionItem || !subscriptionItem.price.recurring) {
+    throw new Error("Subscription item or recurring price data is missing");
+  }
+
+  // Calculate current_period_end from billing_cycle_anchor
+  const billingCycleAnchor = subscription.billing_cycle_anchor;
+  const interval = subscriptionItem.price.recurring.interval;
+  const intervalCount = subscriptionItem.price.recurring.interval_count || 1;
+
+  let currentPeriodEnd: number;
+  switch (interval) {
+    case "year":
+      currentPeriodEnd = billingCycleAnchor + intervalCount * 365 * 24 * 60 * 60; // 1 year in seconds
+      break;
+    case "month":
+      currentPeriodEnd = billingCycleAnchor + intervalCount * 30 * 24 * 60 * 60; // Approximate 1 month in seconds
+      break;
+    case "week":
+      currentPeriodEnd = billingCycleAnchor + intervalCount * 7 * 24 * 60 * 60; // 1 week in seconds
+      break;
+    case "day":
+      currentPeriodEnd = billingCycleAnchor + intervalCount * 24 * 60 * 60; // 1 day in seconds
+      break;
+    default:
+      throw new Error(`Unsupported plan interval: ${interval}`);
+  }
 
   if (
     subscription.status === "active" ||
@@ -69,40 +103,44 @@ async function handleSubscriptionCreatedOrUpdated(subscriptionId: string) {
   ) {
     await prisma.userSubscription.upsert({
       where: {
-        userId: subscription.metadata.userId,
+        userId: userId,
       },
       create: {
-        userId: subscription.metadata.userId,
+        userId: userId,
         stripeSubscriptionId: subscription.id,
         stripeCustomerId: subscription.customer as string,
-        stripePriceId: subscription.items.data[0].price.id,
-        stripeCurrentPeriodEnd: new Date(
-          subscription.current_period_end * 1000,
-        ),
+        stripePriceId: subscriptionItem.price.id,
+        stripeCurrentPeriodEnd: new Date(currentPeriodEnd * 1000),
         stripeCancelAtPeriodEnd: subscription.cancel_at_period_end,
       },
       update: {
-        stripePriceId: subscription.items.data[0].price.id,
-        stripeCurrentPeriodEnd: new Date(
-          subscription.current_period_end * 1000,
-        ),
+        stripePriceId: subscriptionItem.price.id,
+        stripeCurrentPeriodEnd: new Date(currentPeriodEnd * 1000),
         stripeCancelAtPeriodEnd: subscription.cancel_at_period_end,
       },
     });
   } else {
     await prisma.userSubscription.deleteMany({
       where: {
-        stripeSubscriptionId: subscription.customer as string,
+        stripeCustomerId: subscription.customer as string,
       },
     });
   }
+
+  console.log(
+    "handleSubscriptionCreatedOrUpdated",
+    subscription,
+    "Calculated current_period_end:",
+    new Date(currentPeriodEnd * 1000),
+  );
 }
 
 async function handleSubscriptionDeleted(subscription: Stripe.Subscription) {
-  console.log("handleSubscriptionDeleted");
   await prisma.userSubscription.deleteMany({
     where: {
-      stripeSubscriptionId: subscription.customer as string,
+      stripeCustomerId: subscription.customer as string,
     },
   });
+
+  console.log("handleSubscriptionDeleted", subscription);
 }

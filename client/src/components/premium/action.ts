@@ -11,15 +11,13 @@ export async function createCheckoutSession(priceId: string) {
     throw new Error("Unauthorized");
   }
 
-  const stripeCustomerId = user.privateMetadata.stripeCustomerId as
-    | string
-    | undefined;
+  const stripeCustomerId = user.privateMetadata.stripeCustomerId as string | undefined;
 
   const session = await stripe.checkout.sessions.create({
     line_items: [{ price: priceId, quantity: 1 }],
     mode: "subscription",
-    success_url: `${process.env.NEXT_PUBLIC_BASE_URL}/billing/success`,
-    cancel_url: `${process.env.NEXT_PUBLIC_BASE_URL}/billing`,
+    success_url: `${env.NEXT_PUBLIC_BASE_URL}/billing/success`,
+    cancel_url: `${env.NEXT_PUBLIC_BASE_URL}/billing`,
     customer: stripeCustomerId,
     customer_email: stripeCustomerId
       ? undefined
