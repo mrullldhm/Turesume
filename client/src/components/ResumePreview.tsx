@@ -83,12 +83,12 @@ function PersonalInfoHeader({ resumeData }: ResumeSectionProps) {
   }, [photo]);
 
   return (
-    <div className="flex justify-center gap-6">
+    <div className="flex justify-center gap-6 m">
       {photoSrc && (
         <Image
           src={photoSrc}
-          width={100}
-          height={120}
+          width={80}
+          height={100}
           alt="Author Photo"
           className="aspect-square object-contai"
           style={{

@@ -73,6 +73,7 @@ export async function saveResume(values: ResumeValues) {
 
     const blob = await put(`resume_photos/${path.extname(photo.name)}`, photo, {
       access: "public",
+      allowOverwrite: true, // Allow overwriting to handle same filenames
     });
 
     newPhotoUrl = blob.url;
